@@ -4,7 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { IndexModule } from './index/index.module';
 import { ProductModule } from './layouts/product/product.module';
-import {AppRoutingModule} from "./app-routing.module";
+
+import { RouterModule } from '@angular/router';
+import { AppRoutes } from './app.routing';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,7 +15,7 @@ import {AppRoutingModule} from "./app-routing.module";
     BrowserAnimationsModule,
     IndexModule,
     ProductModule,
-    AppRoutingModule
+    RouterModule.forRoot(AppRoutes)
   ],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
