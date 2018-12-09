@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.5",
     "@angular/animations": "^7.1.2",
     "@angular/cdk": "^7.1.1",
     "@angular/common": "^7.1.2",
@@ -45,6 +46,7 @@
     "node-sass": "^4.11.0",
     "popper": "^1.0.1",
     "rxjs": "~6.3.3",
+    "shortid": "^2.2.14",
     "tether": "^1.4.5",
     "toastr": "^2.1.4",
     "tslib": "^1.9.0",

@@ -1,4 +1,45 @@
-<br>
 <div class="container">
-udalo sie przekierowac
+  <div class="row">
+    <!-- List of Products -->
+    <div class="col-sm-4 mb-2"
+         *ngFor="let product of productList">
+      <div class="item">
+        <div class=" mb-r">
+          <!--Card-->
+          <div class="card card-cascade  card-ecommerce wider">
+            <!--Card image-->
+            <div class="view view-cascade overlay">
+              <img class="card-img-top" [src]="product.productImageUrl"
+                   alt="">
+              <a>
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+
+
+            <div class="card-body card-body-cascade text-center">
+              <!--Category & Title-->
+              <h5>{{ product.productCategory }}</h5>
+              <h4 class="card-title"><strong><a href=""> {{product.productName }} </a></strong></h4>
+
+              <!--Description-->
+              <p class="card-text">{{ product.productDescription }}</p>
+
+              <!--Card footer-->
+              <div class="card-footer">
+                <span class="float-left">{{ product.productPrice }} PLN</span>
+                <span class="float-right">
+        <a data-toggle="tooltip" data-placement="top" title="Share"><i class="fa fa-share-alt mr-3"></i></a>
+        <a class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka"
+           (click)="addToCart(product)"><i
+          class="fa fa-heart"></i></a>
+      </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

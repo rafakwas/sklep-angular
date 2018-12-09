@@ -4,6 +4,11 @@
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
+    "@agm/core": {
+      "version": "1.0.0-beta.5",
+      "resolved": "https://registry.npmjs.org/@agm/core/-/core-1.0.0-beta.5.tgz",
+      "integrity": "sha512-LVENJqtBZEWpX+uJkGI0zgg+Xkm2KkktQm4ojZozArbeNvQkVL6pqVc04Mme6vvOzwJpD1cET5w4byC8Xaq1QQ=="
+    },
     "@angular-devkit/architect": {
       "version": "0.11.2",
       "resolved": "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.11.2.tgz",
@@ -8447,6 +8452,11 @@
       "resolved": "https://registry.npmjs.org/nan/-/nan-2.11.1.tgz",
       "integrity": "sha512-iji6k87OSXa0CcrLl9z+ZiYSuR2o+c0bGuNmXdrhTQTakxytAFsC56SArGYoiHlJlFoHSnvmhpceZJaXkVuOtA=="
     },
+    "nanoid": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/nanoid/-/nanoid-2.0.0.tgz",
+      "integrity": "sha512-SG2qscLE3iM4C0CNzGrsAojJHSVHMS1J8NnvJ31P1lH8P0hGHOiafmniNJz6w6q7vuoDlV7RdySlJgtqkFEVtQ=="
+    },
     "nanomatch": {
       "version": "1.2.13",
       "resolved": "https://registry.npmjs.org/nanomatch/-/nanomatch-1.2.13.tgz",
@@ -11088,6 +11098,14 @@
         "glob": "^7.0.0",
         "interpret": "^1.0.0",
         "rechoir": "^0.6.2"
+      }
+    },
+    "shortid": {
+      "version": "2.2.14",
+      "resolved": "https://registry.npmjs.org/shortid/-/shortid-2.2.14.tgz",
+      "integrity": "sha512-4UnZgr9gDdA1kaKj/38IiudfC3KHKhDc1zi/HSxd9FQDR0VLwH3/y79tZJLsVYPsJgIjeHjqIWaWVRJUj9qZOQ==",
+      "requires": {
+        "nanoid": "^2.0.0"
       }
     },
     "signal-exit": {

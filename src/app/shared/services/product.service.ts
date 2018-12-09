@@ -5,16 +5,44 @@ import { ToastrService } from './toastr.service';
 
 @Injectable()
 export class ProductService {
+  products: AngularFireList<Product>;
+  product: AngularFireObject<Product>;
 
 	navbarCartCount = 0;
 
 	constructor(
+    private db: AngularFireDatabase,
     private toastrService: ToastrService
   ) {
 		this.calculateLocalCartProdCounts();
 	}
 
-	addToCart(data: Product): void {
+
+  getProducts() {
+    this.products = this.db.list('products');
+    return this.products;
+  }
+
+  createProduct(data: Product) {
+    console.log(data);
+    console.log(this.products);
+    this.products.push(data);
+  }
+
+  getProductById(key: string) {
+    this.product = this.db.object('products/' + key);
+    return this.product;
+  }
+
+  updateProduct(data: Product) {
+    this.products.update(data.$key, data);
+  }
+
+  deleteProduct(key: string) {
+    this.products.remove(key);
+  }
+
+  addToCart(data: Product): void {
 		let a: Product[];
 		a = JSON.parse(localStorage.getItem('avct_item')) || [];
 		a.push(data);
