@@ -26,7 +26,6 @@ export class ProductListComponent implements OnInit {
     x.snapshotChanges().subscribe(
       (product) => {
         this.productList = [];
-        this.toastrService.info('Fetching data', '');
         product.forEach((element) => {
           const y = element.payload.toJSON();
           y['$key'] = element.key;

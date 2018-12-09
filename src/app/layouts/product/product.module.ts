@@ -6,12 +6,14 @@ import {RouterModule} from "@angular/router";
 import { ProductRoutes } from "./product.routing";
 import {SharedModule} from "../../shared/shared.module";
 import { AddProductComponent } from './add-product/add-product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule],
   declarations: [
     ProductListComponent,
     AddProductComponent,
+    ShoppingCartComponent,
   ],
 
 })
