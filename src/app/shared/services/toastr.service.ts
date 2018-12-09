@@ -10,17 +10,13 @@ export class ToastrService {
 		toastr.success(msg, title);
 	}
 	info(title, msg) {
-    console.log(title)
-    console.log(msg)
-    // toastr.info(msg, title);
+		toastr.info(msg, title);
 	}
 	warning(title, msg) {
 		toastr.warning(msg, title);
 	}
 	error(title, msg) {
-    console.error(title)
-    console.error(msg)
-		// toastr.error(msg, title);
+		toastr.error(msg, title);
 	}
 
 	wait(title, msg) {

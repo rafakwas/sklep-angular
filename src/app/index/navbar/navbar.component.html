@@ -28,14 +28,21 @@
         </li>
 
       </ul>
-      <!-- Links -->
-
-
     </div>
-    <!-- Collapsible content -->
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <div>
+          <a class="nav-link" [routerLink]="['/products/cart-items']">
+            <i class="fa fa-shopping-cart">
+              <span class="mt-2"> {{productService.navbarCartCount}}</span>
+            </i>
+          </a>
+        </div>
+      </li>
+    </ul>
 
   </nav>
-  <!--/.Navbar-->
 </header>
 <router-outlet></router-outlet>
 

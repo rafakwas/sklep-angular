@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit {
         });
       },
       (err) => {
-        this.toastrService.error('Error while fetching Products', err);
+        this.toastrService.error('Błąd podczas pobierania listy produktów', err);
       }
     );
   }
