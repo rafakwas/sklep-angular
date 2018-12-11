@@ -43,14 +43,26 @@ export class ProductService {
   }
 
   addToCart(data: Product): void {
-		let a: Product[];
-		a = JSON.parse(localStorage.getItem('avct_item')) || [];
-		a.push(data);
+    data.productQuatity=1;
+    let a: Product[];
+    a = JSON.parse(localStorage.getItem('avct_item')) || [];
+
+    var found = false;
+    for (let i = 0; i < a.length; i++) {
+      if (a[i].productId === data.productId) {
+        a[i].productQuatity++;
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      a.push(data);
+    }
+
 		this.toastrService.wait('Adding Product to Cart', 'Product Adding to the cart');
-		setTimeout(() => {
-			localStorage.setItem('avct_item', JSON.stringify(a));
-			this.calculateLocalCartProdCounts();
-		}, 500);
+    localStorage.setItem('avct_item', JSON.stringify(a));
+    this.calculateLocalCartProdCounts();
 	}
 
 	removeLocalCartProduct(product: Product) {
@@ -58,7 +70,11 @@ export class ProductService {
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].productId === product.productId) {
-				products.splice(i, 1);
+        if (products[i].productQuatity === 1) {
+          products.splice(i, 1);
+        } else {
+          products[i].productQuatity--;
+        }
 				break;
 			}
 		}
@@ -77,6 +93,11 @@ export class ProductService {
 
 	// returning LocalCarts Product Count
 	calculateLocalCartProdCounts() {
-		this.navbarCartCount = this.getLocalCartProducts().length;
+    var counter = 0;
+    const products: Product[] = JSON.parse(localStorage.getItem('avct_item')) || [];
+    products.forEach((product) => {
+      counter += product.productQuatity;
+    });
+    this.navbarCartCount = counter;
 	}
 }
