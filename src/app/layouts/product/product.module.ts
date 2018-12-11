@@ -11,9 +11,11 @@ import {FilterByCategory} from "./pipe/filterByCategory";
 import {FilterByName} from "./pipe/filterByName";
 import {LowerPriceBound} from "./pipe/LowerPriceBound";
 import {UpperPriceBound} from "./pipe/UpperPriceBound";
+import { CheckoutComponent } from './checkout/checkout.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule],
+  imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule,ReactiveFormsModule],
   declarations: [
     ProductListComponent,
     AddProductComponent,
@@ -21,8 +23,10 @@ import {UpperPriceBound} from "./pipe/UpperPriceBound";
     FilterByCategory,
     FilterByName,
     LowerPriceBound,
-    UpperPriceBound
+    UpperPriceBound,
+    CheckoutComponent
   ],
 
 })
 export class ProductModule { }
+

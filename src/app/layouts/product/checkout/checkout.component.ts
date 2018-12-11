@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl, NgForm} from "@angular/forms";
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product';
 import {Order} from "src/app/shared/models/order";
@@ -18,16 +18,30 @@ const moment = require('moment');
 export class CheckoutComponent implements OnInit {
 
   order: Order = new Order();
+  orderForm : FormGroup;
+
   constructor(
     private productService: ProductService
   ) {}
 
   ngOnInit() {
+    this.orderForm = this.createFormGroup();
   }
 
-  createOrder(orderForm: NgForm) {
-    toastr.success('order to ' + orderForm.value['firstname'] + 'is set successfully', 'Order creation');
+  createFormGroup() {
+    return new FormGroup({
+      firstname: new FormControl('',Validators.required),
+      lastname: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
+      city: new FormControl('',Validators.required),
+      postalCode: new FormControl('',Validators.required),
+      phone: new FormControl('',Validators.required),
+      email: new FormControl('',Validators.required)
+    });
   }
 
+  createOrder() {
+    toastr.success('order to ' + this.orderForm.value + 'is set successfully', 'Order creation');
+  }
 
 }

@@ -1,4 +1,3 @@
-<!--Section: Contact v.2-->
 <section class="mb-4">
   <!--Section heading-->
   <h2 class="h1-responsive font-weight-bold text-center my-4">Złóż zamówienie</h2>
@@ -9,25 +8,20 @@
 
     <!--Grid column-->
     <div class="col-md-12 mb-md-0 mb-5">
-      <form class="needs-validation" id="checkout-form" name="checkout-form" #addOrderForm="ngForm" (ngSubmit)="createOrder(addOrderForm)">
+      <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
 
         <div class="row">
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="firstname" name="firstname" class="form-control" [(ngModel)]="order.firstname">
+              <input type="text" id="firstname" class="form-control"
+                     formControlName="firstname">
               <label for="firstname" class="">Imię</label>
-              <div class="invalid-feedback">
-                Podaj pierwsze imię
-              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="lastname" name="lastname" class="form-control" [(ngModel)]="order.lastname">
+              <input type="text" id="lastname" class="form-control" formControlName="lastname">
               <label for="lastname" class="">Nazwisko</label>
-              <div class="invalid-feedback">
-                Podaj nazwisko
-              </div>
             </div>
           </div>
         </div>
@@ -35,29 +29,20 @@
         <div class="row">
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="address" name="address" class="form-control" [(ngModel)]="order.address">
+              <input type="text" id="address" name="address" class="form-control" formControlName="address">
               <label for="address" class="">Adres</label>
-              <div class="invalid-feedback">
-                Podaj adres
-              </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="md-form mb-0">
-              <input type="text" id="postalCode" name="postalCode" class="form-control" [(ngModel)]="order.postalCode">
+              <input type="text" id="postalCode" name="postalCode" class="form-control" formControlName="postalCode">
               <label for="postalCode" class="">Kod pocztowy</label>
-              <div class="invalid-feedback">
-                Podaj kod pocztowy
-              </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="md-form mb-0">
-              <input type="text" id="city" name="city" class="form-control" [(ngModel)]="order.city">
+              <input type="text" id="city" name="city" class="form-control" formControlName="city">
               <label for="city" class="">Miasto</label>
-              <div class="invalid-feedback">
-                Podaj miasto
-              </div>
             </div>
           </div>
         </div>
@@ -65,26 +50,20 @@
         <div class="row">
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="email" name="email" class="form-control" [(ngModel)]="order.email">
+              <input type="text" id="email" name="email" class="form-control" formControlName="email">
               <label for="email" class="">Email</label>
-              <div class="invalid-feedback">
-                Podaj email
-              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="order.phone">
+              <input type="text" id="phone" name="phone" class="form-control" formControlName="phone">
               <label for="phone">Telefon</label>
-              <div class="invalid-feedback">
-                Podaj numer telefonu
-              </div>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Dokończ zamówienie</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!orderForm.valid" >Dokończ zamówienie</button>
         </div>
       </form>
     </div>
