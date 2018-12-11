@@ -1,17 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="categoryFilter"></label>
-        <select class="form-control" name="" id="categoryFilter" [(ngModel)]="selectedCategory">
+        <select class="form-control" name="" id="categoryFilter" [(ngModel)]="filterByCategory">
           <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
         </select>
       </div>
     </div>
+    <div class="col-md-6">
+      <label for="nameFilter"></label>
+      <div class="form-group">
+        <input type="text" class="form-control" id="nameFilter" name="nameFilter"
+                  [(ngModel)]="filterByName"/>
+      </div>
+    </div>
+
   </div>
   <div class="row">
     <div class="col-sm-4 mb-2"
-         *ngFor="let product of productList | filter: selectedCategory">
+         *ngFor="let product of productList | filterByCategory: filterByCategory | filterByName: filterByName | paginate: { itemsPerPage: 2, currentPage: page }">
       <div class="item">
         <div class=" mb-r">
           <!--Card-->
@@ -47,6 +55,11 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="text-center mt-3">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
   </div>
 </div>

@@ -18,6 +18,7 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import {FirebaseConfig} from "../../environments/firebase";
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
 	imports: [
@@ -29,13 +30,15 @@ import {FirebaseConfig} from "../../environments/firebase";
 		FormsModule,
 		HttpClientModule,
 		RouterModule,
-	],
+    NgxPaginationModule
+  ],
 	declarations: [
 		NoProductsFoundComponent,
 		NoAccessComponent,
 		PageNotFoundComponent,
 	],
 	exports: [
+    NgxPaginationModule,
 		NoProductsFoundComponent,
 		FormsModule,
 		MDBBootstrapModule,

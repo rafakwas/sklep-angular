@@ -13,7 +13,8 @@ export class ProductListComponent implements OnInit {
   productList: Product[];
 
   categories = [ 'All', 'INNE' ];
-  selectedCategory: 'All';
+  filterByCategory: 'All';
+  filterByName: '';
   page = 1;
 
   constructor(
