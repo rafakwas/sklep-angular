@@ -1,0 +1,94 @@
+<!--Section: Contact v.2-->
+<section class="mb-4">
+  <!--Section heading-->
+  <h2 class="h1-responsive font-weight-bold text-center my-4">Złóż zamówienie</h2>
+  <!--Section description-->
+  <p class="text-center w-responsive mx-auto mb-5">Gdzie Twoje zamówienie ma zostać dostarczone?</p>
+
+  <div class="row">
+
+    <!--Grid column-->
+    <div class="col-md-12 mb-md-0 mb-5">
+      <form class="needs-validation" id="checkout-form" name="checkout-form" #addOrderForm="ngForm" (ngSubmit)="createOrder(addOrderForm)">
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="firstname" name="firstname" class="form-control" [(ngModel)]="order.firstname">
+              <label for="firstname" class="">Imię</label>
+              <div class="invalid-feedback">
+                Podaj pierwsze imię
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="lastname" name="lastname" class="form-control" [(ngModel)]="order.lastname">
+              <label for="lastname" class="">Nazwisko</label>
+              <div class="invalid-feedback">
+                Podaj nazwisko
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="address" name="address" class="form-control" [(ngModel)]="order.address">
+              <label for="address" class="">Adres</label>
+              <div class="invalid-feedback">
+                Podaj adres
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="md-form mb-0">
+              <input type="text" id="postalCode" name="postalCode" class="form-control" [(ngModel)]="order.postalCode">
+              <label for="postalCode" class="">Kod pocztowy</label>
+              <div class="invalid-feedback">
+                Podaj kod pocztowy
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="md-form mb-0">
+              <input type="text" id="city" name="city" class="form-control" [(ngModel)]="order.city">
+              <label for="city" class="">Miasto</label>
+              <div class="invalid-feedback">
+                Podaj miasto
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="email" name="email" class="form-control" [(ngModel)]="order.email">
+              <label for="email" class="">Email</label>
+              <div class="invalid-feedback">
+                Podaj email
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="order.phone">
+              <label for="phone">Telefon</label>
+              <div class="invalid-feedback">
+                Podaj numer telefonu
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Dokończ zamówienie</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+<!--Section: Contact v.2-->
