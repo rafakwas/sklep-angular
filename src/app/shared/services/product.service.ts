@@ -24,8 +24,7 @@ export class ProductService {
   }
 
   createProduct(data: Product) {
-    console.log(data);
-    console.log(this.products);
+    this.toastrService.info("quantity",data.productQuatity);
     this.products.push(data);
   }
 
@@ -43,7 +42,14 @@ export class ProductService {
   }
 
   addToCart(data: Product): void {
-    data.productQuatity=1;
+    var copiedProduct = new Product();
+    copiedProduct.productName = data.productName;
+    copiedProduct.productCategory = data.productCategory;
+    copiedProduct.productQuatity = 1;
+    copiedProduct.productDescription = data.productDescription;
+    copiedProduct.productId = data.productId;
+    copiedProduct.productImageUrl = data.productImageUrl;
+
     let a: Product[];
     a = JSON.parse(localStorage.getItem('avct_item')) || [];
 
@@ -57,7 +63,7 @@ export class ProductService {
     }
 
     if (!found) {
-      a.push(data);
+      a.push(copiedProduct);
     }
 
 		this.toastrService.wait('Adding Product to Cart', 'Product Adding to the cart');
@@ -84,14 +90,10 @@ export class ProductService {
 		this.calculateLocalCartProdCounts();
 	}
 
-	// Fetching Locat CartsProducts
 	getLocalCartProducts(): Product[] {
-		const products: Product[] = JSON.parse(localStorage.getItem('avct_item')) || [];
-
-		return products;
+    return JSON.parse(localStorage.getItem('avct_item')) || [];
 	}
 
-	// returning LocalCarts Product Count
 	calculateLocalCartProdCounts() {
     var counter = 0;
     const products: Product[] = JSON.parse(localStorage.getItem('avct_item')) || [];

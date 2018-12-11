@@ -53,5 +53,17 @@ export class ProductListComponent implements OnInit {
     this.productService.addToCart(product);
   }
 
+  isProductAvailable(product : Product) {
+    let cartProducts = this.productService.getLocalCartProducts();
+    for (var i = 0; i < cartProducts.length; i++) {
+      if (cartProducts[i].productId == product.productId) {
+        if (product.productQuatity <= cartProducts[i].productQuatity) {
+          console.log("database product " + product.productQuatity + ". cart product " + cartProducts[i].productQuatity);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
 }
