@@ -7,6 +7,7 @@ import { ProductRoutes } from "./product.routing";
 import {SharedModule} from "../../shared/shared.module";
 import { AddProductComponent } from './add-product/add-product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import {FilterPipe} from "./product-list/filter";
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule],
@@ -14,6 +15,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     ProductListComponent,
     AddProductComponent,
     ShoppingCartComponent,
+    FilterPipe
   ],
 
 })

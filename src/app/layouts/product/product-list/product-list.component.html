@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
-    <!-- List of Products -->
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="categoryFilter"></label>
+        <select class="form-control" name="" id="categoryFilter" [(ngModel)]="selectedCategory">
+          <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-sm-4 mb-2"
-         *ngFor="let product of productList">
+         *ngFor="let product of productList | filter: selectedCategory">
       <div class="item">
         <div class=" mb-r">
           <!--Card-->

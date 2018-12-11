@@ -12,6 +12,10 @@ export class ProductListComponent implements OnInit {
 
   productList: Product[];
 
+  categories = [ 'All', 'INNE' ];
+  selectedCategory: 'All';
+  page = 1;
+
   constructor(
     private productService: ProductService,
     private toastrService: ToastrService
