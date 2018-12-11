@@ -30,7 +30,7 @@ export class CheckoutComponent implements OnInit {
 
   createFormGroup() {
     return new FormGroup({
-      firstname: new FormControl('',Validators.required),
+      firstname: new FormControl('',[Validators.required,Validators.minLength(2)]),
       lastname: new FormControl('',Validators.required),
       address: new FormControl('',Validators.required),
       city: new FormControl('',Validators.required),

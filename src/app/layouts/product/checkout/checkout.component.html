@@ -10,18 +10,20 @@
     <div class="col-md-12 mb-md-0 mb-5">
       <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
 
-        <div class="row">
+        <div class="form-row">
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="firstname" class="form-control"
-                     formControlName="firstname">
-              <label for="firstname" class="">Imię</label>
+              <input type="text" id="firstname" name="firstname" class="form-control text-line"
+                     formControlName="firstname" placeholder="Imię">
+              <div *ngIf="orderForm.controls['firstname'].errors">
+                <div [hidden]="!orderForm.controls['firstname'].errors.required" class="cross-validation-error-message alert alert-danger"  >*Proszę podać imię</div>
+                <div [hidden]="!orderForm.controls['firstname'].errors.minlength">*Za mało literek</div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="lastname" class="form-control" formControlName="lastname">
-              <label for="lastname" class="">Nazwisko</label>
+              <input type="text" id="lastname" class="form-control" formControlName="lastname" placeholder="Nazwisko">
             </div>
           </div>
         </div>
@@ -29,20 +31,17 @@
         <div class="row">
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="address" name="address" class="form-control" formControlName="address">
-              <label for="address" class="">Adres</label>
+              <input type="text" id="address" name="address" class="form-control" formControlName="address" placeholder="Adres">
             </div>
           </div>
           <div class="col-md-3">
             <div class="md-form mb-0">
-              <input type="text" id="postalCode" name="postalCode" class="form-control" formControlName="postalCode">
-              <label for="postalCode" class="">Kod pocztowy</label>
+              <input type="text" id="postalCode" name="postalCode" class="form-control" formControlName="postalCode" placeholder="Kod pocztowy">
             </div>
           </div>
           <div class="col-md-3">
             <div class="md-form mb-0">
-              <input type="text" id="city" name="city" class="form-control" formControlName="city">
-              <label for="city" class="">Miasto</label>
+              <input type="text" id="city" name="city" class="form-control" formControlName="city" placeholder="Miasto">
             </div>
           </div>
         </div>
@@ -50,14 +49,12 @@
         <div class="row">
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="email" name="email" class="form-control" formControlName="email">
-              <label for="email" class="">Email</label>
+              <input type="text" id="email" name="email" class="form-control" formControlName="email" placeholder="Email">
             </div>
           </div>
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="phone" name="phone" class="form-control" formControlName="phone">
-              <label for="phone">Telefon</label>
+              <input type="text" id="phone" name="phone" class="form-control" formControlName="phone" placeholder="Numer telefonu">
             </div>
           </div>
         </div>
