@@ -9,6 +9,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import {FilterByCategory} from "./pipe/filterByCategory";
 import {FilterByName} from "./pipe/filterByName";
+import {LowerPriceBound} from "./pipe/LowerPriceBound";
+import {UpperPriceBound} from "./pipe/UpperPriceBound";
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule],
@@ -17,7 +19,9 @@ import {FilterByName} from "./pipe/filterByName";
     AddProductComponent,
     ShoppingCartComponent,
     FilterByCategory,
-    FilterByName
+    FilterByName,
+    LowerPriceBound,
+    UpperPriceBound
   ],
 
 })

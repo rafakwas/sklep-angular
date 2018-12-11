@@ -15,6 +15,8 @@ export class ProductListComponent implements OnInit {
   categories = [ 'All', 'INNE' ];
   filterByCategory: 'All';
   filterByName: '';
+  lowerPriceBound : number;
+  upperPriceBound : number;
   page = 1;
 
   constructor(

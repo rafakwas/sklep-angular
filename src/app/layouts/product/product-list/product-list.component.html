@@ -15,11 +15,26 @@
                   [(ngModel)]="filterByName"/>
       </div>
     </div>
-
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="lowerPriceBound"></label>
+        <input type="number" class="form-control" id="lowerPriceBound" name="lowerPriceBound"
+               [(ngModel)]="lowerPriceBound"/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="upperPriceBound"></label>
+      <div class="form-group">
+        <input type="number" class="form-control" id="upperPriceBound" name="upperPriceBound"
+               [(ngModel)]="upperPriceBound"/>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-4 mb-2"
-         *ngFor="let product of productList | filterByCategory: filterByCategory | filterByName: filterByName | paginate: { itemsPerPage: 2, currentPage: page }">
+         *ngFor="let product of productList | filterByCategory: filterByCategory | filterByName: filterByName | lowerPriceBound: lowerPriceBound | upperPriceBound: upperPriceBound | paginate: { itemsPerPage: 2, currentPage: page }">
       <div class="item">
         <div class=" mb-r">
           <!--Card-->
