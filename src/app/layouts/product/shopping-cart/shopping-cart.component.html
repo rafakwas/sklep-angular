@@ -47,13 +47,13 @@
               <h4 class="text-right">Suma <strong>{{totalValue}}</strong></h4>
             </div>
             <div class="col-xs-3">
-              <button type="button" class="btn btn-success btn-block">
-                Zamów
+              <button type="button" class="btn btn-success btn-block" [routerLink]="[ '/products/checkout' ]" >
+                Złóż zamówienie
               </button>
             </div>
             <div class="col-xs-3">
-              <button type="button" class="btn btn-primary btn-block">
-                Kontynuuj
+              <button type="button" class="btn btn-primary btn-block" [routerLink]="[ '/products/all-products' ]" >
+                Kontynuuj zakupy
               </button>
             </div>
           </div>
