@@ -31,12 +31,12 @@ export class CheckoutComponent implements OnInit {
   createFormGroup() {
     return new FormGroup({
       firstname: new FormControl('',[Validators.required,Validators.minLength(2)]),
-      lastname: new FormControl('',Validators.required),
+      lastname: new FormControl('',[Validators.required,Validators.minLength(2)]),
       address: new FormControl('',Validators.required),
       city: new FormControl('',Validators.required),
-      postalCode: new FormControl('',Validators.required),
-      phone: new FormControl('',Validators.required),
-      email: new FormControl('',Validators.required)
+      postalCode: new FormControl('',[Validators.required,Validators.pattern(/^\d{2}-\d{3}$/)]),
+      phone: new FormControl('',[Validators.required,Validators.minLength(7)]),
+      email: new FormControl('',[Validators.required,Validators.email])
     });
   }
 

@@ -15,8 +15,8 @@
             <div class="md-form mb-0">
               <input type="text" id="firstname" name="firstname" class="form-control text-line"
                      formControlName="firstname" placeholder="Imię">
-              <div *ngIf="orderForm.controls['firstname'].errors">
-                <div [hidden]="!orderForm.controls['firstname'].errors.required" class="cross-validation-error-message alert alert-danger"  >*Proszę podać imię</div>
+              <div *ngIf="orderForm.controls['firstname'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['firstname'].errors.required">*Proszę podać imię</div>
                 <div [hidden]="!orderForm.controls['firstname'].errors.minlength">*Za mało literek</div>
               </div>
             </div>
@@ -24,6 +24,10 @@
           <div class="col-md-6">
             <div class="md-form mb-0">
               <input type="text" id="lastname" class="form-control" formControlName="lastname" placeholder="Nazwisko">
+              <div *ngIf="orderForm.controls['lastname'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['lastname'].errors.required">*Proszę podać nazwisko</div>
+                <div [hidden]="!orderForm.controls['lastname'].errors.minlength">*Za mało literek</div>
+              </div>
             </div>
           </div>
         </div>
@@ -32,16 +36,26 @@
           <div class="col-md-6">
             <div class="md-form mb-0">
               <input type="text" id="address" name="address" class="form-control" formControlName="address" placeholder="Adres">
+              <div *ngIf="orderForm.controls['address'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['address'].errors.required">*Proszę podać adres</div>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="md-form mb-0">
               <input type="text" id="postalCode" name="postalCode" class="form-control" formControlName="postalCode" placeholder="Kod pocztowy">
+              <div *ngIf="orderForm.controls['postalCode'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['postalCode'].errors.required">*Proszę podać kod pocztowy</div>
+                <div [hidden]="!orderForm.controls['postalCode'].errors.patternMismatch">Nieprawidłowy kod pocztowy</div>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="md-form mb-0">
               <input type="text" id="city" name="city" class="form-control" formControlName="city" placeholder="Miasto">
+              <div *ngIf="orderForm.controls['city'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['city'].errors.required">*Proszę podać miasto</div>
+              </div>
             </div>
           </div>
         </div>
@@ -50,11 +64,19 @@
           <div class="col-md-6">
             <div class="md-form mb-0">
               <input type="text" id="email" name="email" class="form-control" formControlName="email" placeholder="Email">
+              <div *ngIf="orderForm.controls['email'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['email'].errors.required">*Proszę podać email</div>
+                <div [hidden]="!orderForm.controls['email'].errors.email">*Nieprawidłowy adres email</div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="md-form mb-0">
               <input type="text" id="phone" name="phone" class="form-control" formControlName="phone" placeholder="Numer telefonu">
+              <div *ngIf="orderForm.controls['phone'].errors" class="alert alert-danger">
+                <div [hidden]="!orderForm.controls['phone'].errors.required">*Proszę podać numer telefonu</div>
+                <div [hidden]="!orderForm.controls['phone'].errors.minlength">*Za mało literek</div>
+              </div>
             </div>
           </div>
         </div>
