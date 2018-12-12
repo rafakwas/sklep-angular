@@ -2,6 +2,7 @@ import {Component, OnInit, OnChanges, SimpleChanges, SimpleChange, Input} from '
 import {ProductService} from "../../../shared/services/product.service";
 import {Product} from "../../../shared/models/product";
 import * as _ from 'lodash';
+import {CartService} from "../../../shared/services/cart.service";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,24 +15,22 @@ export class ShoppingCartComponent implements OnInit {
   totalValue = 0;
 
   constructor(
-    public productService : ProductService
+    public productService : ProductService,
+    private cartService : CartService
   ) { }
 
   ngOnInit() {
-    this.cartProducts = this.productService.getLocalCartProducts();
+    this.cartProducts = this.cartService.getLocalCartProducts();
     this.recalculate();
   }
 
   removeCartProduct(product: Product) {
-    this.productService.removeLocalCartProduct(product);
-    this.cartProducts = this.productService.getLocalCartProducts();
+    this.cartService.removeLocalCartProduct(product);
+    this.cartProducts = this.cartService.getLocalCartProducts();
     this.recalculate();
   }
 
   recalculate() {
-    this.totalValue = 0;
-    this.cartProducts.forEach((product) => {
-      this.totalValue += product.price*product.quantity;
-    });
+    this.totalValue = this.cartService.getLocalCartProductsTotalValue()
   }
 }

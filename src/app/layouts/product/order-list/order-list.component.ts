@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Order, OrderStatus} from "../../../shared/models/order";
 import {OrderService} from "../../../shared/services/order.service";
 import {ToastrService} from "../../../shared/services/toastr.service";
+import {plainToClass, deserialize} from "class-transformer";
+import {OrderProduct} from "../../../shared/models/orderProduct";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-order-list',
@@ -10,7 +13,7 @@ import {ToastrService} from "../../../shared/services/toastr.service";
 })
 export class OrderListComponent implements OnInit {
 
-  orderList: Order[];
+  orderList: Observable<Order[]>;
 
   constructor(private orderService : OrderService, private toastrService : ToastrService) { }
 
@@ -19,27 +22,26 @@ export class OrderListComponent implements OnInit {
   }
 
   getAllOrders() {
-    const x = this.orderService.getOrders();
-    x.snapshotChanges().subscribe(
-      (order) => {
-        this.orderList = [];
-        order.forEach((element) => {
-          const y = element.payload.toJSON();
-          y['$key'] = element.key;
-          this.orderList.push(y as Order);
-        });
-      },
-      (err) => {
-        this.toastrService.error('Błąd podczas pobierania zamówień', err);
-      }
-    );
+    this.orderList = this.orderService.getOrders();
   }
 
   completeOrder(order : Order) {
-    order.status = OrderStatus.COMPLETED;
-    order.sendDate = new Date();
-    this.toastrService.info("order.$key",order.$key);
-    this.orderService.updateOrder(order);
+    this.orderService.realizeOrder(order);
+    // order.status = OrderStatus.COMPLETED;
+    // order.sendDate = new Date();
+    // var orderProducts = [];
+    // orderProducts = Object.assign({},order.products);
+    // this.toastrService.info("sprawdzenie",orderProducts);
+    // orderProducts.forEach((orderProduct) => {1
+    //   this.toastrService.info("hello","hlelo");
+    //
+    // });
+      // products = JSON.parse(JSON.stringify(order.products));
+    // products.forEach((orderProduct) => {
+    //   orderProduct.isChecked = true;
+    // });
+    // order.products = Object.assign({},products);
+    // this.orderService.updateOrder(order);
   }
 
   getCompletedOrderStatus() {

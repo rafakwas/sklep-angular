@@ -1,11 +1,9 @@
-export class  Product {
-  $key: string;
-  productId: string;
-  name: string;
-  category: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-  productAdded: number;
-  quantity: number;
+import {Product} from "./product";
+export class OrderProduct {
+  isChecked : boolean;
+  product : Product;
+  constructor(isChecked: boolean, product: Product) {
+    this.isChecked = isChecked;
+    this.product = product;
+  }
 }

@@ -1,9 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MDBBootstrapModule } from "angular-bootstrap-md";
-import { AngularFireModule } from "angularfire2";
-import { AngularFireDatabaseModule } from "angularfire2/database";
-import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FormsModule, FormBuilder } from "@angular/forms";
 import { RouterModule, Router } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
@@ -19,15 +20,17 @@ import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import {FirebaseConfig} from "../../environments/firebase";
 import {NgxPaginationModule} from 'ngx-pagination';
-import {OrderService} from "./services/order.service"; // <-- import the module
+import {OrderService} from "./services/order.service";
+import {CartService} from "./services/cart.service"; // <-- import the module
 
 @NgModule({
 	imports: [
 		CommonModule,
 		MDBBootstrapModule.forRoot(),
 		AngularFireModule.initializeApp(FirebaseConfig),
-		AngularFireDatabaseModule,
-		AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
 		FormsModule,
 		HttpClientModule,
 		RouterModule,
@@ -55,6 +58,6 @@ import {OrderService} from "./services/order.service"; // <-- import the module
 		CdkTreeModule,
 		DragDropModule, ScrollingModule
 	],
-	providers: [ProductService, OrderService, FormBuilder]
+	providers: [ProductService, OrderService, CartService, FormBuilder]
 })
 export class SharedModule { }

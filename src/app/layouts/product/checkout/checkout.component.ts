@@ -6,12 +6,14 @@ import {Order, OrderStatus} from "src/app/shared/models/order";
 import {OrderService} from "../../../shared/services/order.service";
 import {Router} from "@angular/router";
 import {OrderProduct} from "../../../shared/models/orderProduct";
+import {CartService} from "../../../shared/services/cart.service";
 
 declare var $: any;
 declare var require: any;
 declare var toastr: any;
 const shortId = require('shortid');
 const moment = require('moment');
+const _ = require('lodash');
 
 @Component({
   selector: 'app-checkout',
@@ -25,6 +27,7 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private orderService: OrderService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -46,23 +49,10 @@ export class CheckoutComponent implements OnInit {
 
   createOrder() {
     var order = this.orderForm.value;
-    // order.products = this.productService.getLocalCartProducts();
-    order.status = OrderStatus.AWAITING;
-    let totalPrice = 0;
-    let cartProducts = this.productService.getLocalCartProducts();
-    var orderProducts = [];
-    cartProducts.forEach((product) => {
-      totalPrice += product.price*product.quantity;
-      var orderProduct = new OrderProduct();
-      orderProduct.isChecked = false;
-      orderProduct.product = product;
-      orderProducts.push(orderProduct);
-      delete product['$key'];
-    });
-    order.products = Object.assign({}, orderProducts);
-    order.totalPrice = totalPrice;
-    this.orderService.createOrder(order);
-    this.productService.freeLocalCart();
+    let cartProducts = this.cartService.getLocalCartProducts();
+    let totalPrice = this.cartService.calculateCartProductsPrice();
+    this.orderService.makeOrder(order,cartProducts,totalPrice);
+    this.cartService.freeLocalCart();
     toastr.success('order to ' + order.email + 'is set successfully', 'Order creation');
     this.router.navigateByUrl('/products/all-products');
   }
