@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product';
 import {Order, OrderStatus} from "src/app/shared/models/order";
 import {OrderService} from "../../../shared/services/order.service";
+import {Router} from "@angular/router";
 
 declare var $: any;
 declare var require: any;
@@ -22,7 +23,8 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -54,7 +56,9 @@ export class CheckoutComponent implements OnInit {
     });
     order.totalPrice = totalPrice;
     this.orderService.createOrder(order);
+    this.productService.freeLocalCart();
     toastr.success('order to ' + order.email + 'is set successfully', 'Order creation');
+    this.router.navigateByUrl('/products/all-products');
   }
 
 }

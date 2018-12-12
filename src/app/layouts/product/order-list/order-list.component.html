@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 mb-2" *ngFor="let order of orderList">
+      <div class="item">
+        <div class=" mb-r">
+          <!--Card-->
+          <div class="card card-cascade  card-ecommerce wider">
+              <div class="card-body card-body-cascade text-center">
+              <h5>{{ order.totalPrice }}</h5>
+              <h4 class="card-title"><strong><a href=""> {{order.status }} </a></strong></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
