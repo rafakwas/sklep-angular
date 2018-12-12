@@ -36,7 +36,10 @@ export class OrderListComponent implements OnInit {
   }
 
   completeOrder(order : Order) {
-    this.toastrService.info("clicked","!");
+    order.status = OrderStatus.COMPLETED;
+    order.sendDate = new Date();
+    this.toastrService.info("order.$key",order.$key);
+    this.orderService.updateOrder(order);
   }
 
   getCompletedOrderStatus() {

@@ -5,6 +5,7 @@ import { Product } from 'src/app/shared/models/product';
 import {Order, OrderStatus} from "src/app/shared/models/order";
 import {OrderService} from "../../../shared/services/order.service";
 import {Router} from "@angular/router";
+import {OrderProduct} from "../../../shared/models/orderProduct";
 
 declare var $: any;
 declare var require: any;
@@ -45,14 +46,20 @@ export class CheckoutComponent implements OnInit {
 
   createOrder() {
     var order = this.orderForm.value;
-    order.products = this.productService.getLocalCartProducts();
+    // order.products = this.productService.getLocalCartProducts();
     order.status = OrderStatus.AWAITING;
     let totalPrice = 0;
     let cartProducts = this.productService.getLocalCartProducts();
+    var orderProducts = [];
     cartProducts.forEach((product) => {
       totalPrice += product.price*product.quantity;
+      var orderProduct = new OrderProduct();
+      orderProduct.isChecked = false;
+      orderProduct.product = product;
+      orderProducts.push(orderProduct);
       delete product['$key'];
     });
+    order.products = Object.assign({}, orderProducts);
     order.totalPrice = totalPrice;
     this.orderService.createOrder(order);
     this.productService.freeLocalCart();

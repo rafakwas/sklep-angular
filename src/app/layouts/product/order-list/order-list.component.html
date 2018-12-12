@@ -41,7 +41,7 @@
       {{item.sendDate}}
     </td>
     <td>
-        <button class="btn btn-success btn-lg btn-block" [hidden]="item.status === getCompletedOrderStatus()" (click)="completeOrder(item)">Dokończ zamówienie</button>
+        <button class="btn btn-success btn-block" [hidden]="item.status === getCompletedOrderStatus()" (click)="completeOrder(item)">Dokończ zamówienie</button>
     </td>
   </tr>
   </tbody>
