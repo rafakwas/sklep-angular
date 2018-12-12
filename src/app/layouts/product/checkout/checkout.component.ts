@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl, NgForm} from "@angular/forms";
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product';
-import {Order} from "src/app/shared/models/order";
+import {Order, OrderStatus} from "src/app/shared/models/order";
+import {OrderService} from "../../../shared/services/order.service";
 
 declare var $: any;
 declare var require: any;
@@ -17,11 +18,11 @@ const moment = require('moment');
 })
 export class CheckoutComponent implements OnInit {
 
-  order: Order = new Order();
   orderForm : FormGroup;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private orderService: OrderService
   ) {}
 
   ngOnInit() {
@@ -41,7 +42,19 @@ export class CheckoutComponent implements OnInit {
   }
 
   createOrder() {
-    toastr.success('order to ' + this.orderForm.value + 'is set successfully', 'Order creation');
+    var order = this.orderForm.value;
+    order.products = this.productService.getLocalCartProducts();
+    order.status = OrderStatus.AWAITING;
+
+    let totalPrice = 0;
+    let cartProducts = this.productService.getLocalCartProducts();
+    cartProducts.forEach((product) => {
+      totalPrice += product.price*product.quantity;
+      delete product['$key'];
+    });
+    order.totalPrice = totalPrice;
+    this.orderService.createOrder(order);
+    toastr.success('order to ' + order.email + 'is set successfully', 'Order creation');
   }
 
 }

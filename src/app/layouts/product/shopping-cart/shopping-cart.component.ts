@@ -31,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
   recalculate() {
     this.totalValue = 0;
     this.cartProducts.forEach((product) => {
-      this.totalValue += product.productPrice*product.productQuatity;
+      this.totalValue += product.price*product.quantity;
     });
   }
 }

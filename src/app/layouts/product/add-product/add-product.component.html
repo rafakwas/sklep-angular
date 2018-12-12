@@ -1,22 +1,16 @@
-<form class="needs-validation" #addProductForm="ngForm" (ngSubmit)="createProduct(addProductForm)">
-  <div class="row">
+<form [formGroup]="productForm" (ngSubmit)="createProduct()">
+<div class="row">
     <div class="col-md-6 mb-3">
-      <label for="productName">Nazwa produktu</label>
-      <input type="text" class="form-control" id="productName" name="productName" [(ngModel)]="product.productName"
+      <label for="name">Nazwa produktu</label>
+      <input type="text" class="form-control" id="name" name="name" formControlName="name"
              placeholder="nazwa"
              value="" required>
-      <div class="invalid-feedback">
-        Nazwa produktu jest wymagana
-      </div>
     </div>
     <div class="col-md-6 mb-3">
       <label for="productCategory">Kategoria</label>
       <input type="text" class="form-control" id="productCategory" name="productCategory"
-             [(ngModel)]="product.productCategory"
+             formControlName="category"
              placeholder="kategoria" value="" required>
-      <div class="invalid-feedback">
-        Kategoria jest wymagana
-      </div>
     </div>
   </div>
 
@@ -26,13 +20,13 @@
     </label>
     <textarea type="text" class="form-control" id="productDescription" placeholder="Tutaj opis..."
               name="productDescription"
-              [(ngModel)]="product.productDescription"></textarea>
+              formControlName="description"></textarea>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-3">
       <label for="productPrice">Cena</label>
-      <input type="number" name="productPrice" class="form-control" [(ngModel)]="product.productPrice"
+      <input type="number" name="productPrice" class="form-control" formControlName="price"
              placeholder="cena"
              id="productPrice" value="" required>
       <div class="invalid-feedback">
@@ -41,8 +35,8 @@
     </div>
     <div class="col-md-6 mb-3">
       <label for="productQuatity">Ilość</label>
-      <input type="text" class="form-control" id="productQuatity" name="productQuatity"
-             [(ngModel)]="product.productQuatity" placeholder="ilość"
+      <input type="number" class="form-control" id="productQuatity" name="productQuatity"
+             formControlName="quantity" placeholder="ilość"
              value="" required>
       <div class="invalid-feedback">
         Ilość jest wymagana
@@ -51,19 +45,13 @@
   </div>
 
   <div class="mb-3">
-    <label for="productSeller">Sprzedawca</label>
-    <input type="text" class="form-control" id="productSeller" [(ngModel)]="product.productSeller"
-           name="productSeller" placeholder="sprzedawca"
-           required>
-  </div>
-  <div class="mb-3">
     <label for="productImageUrl">Zdjęcie</label>
-    <input type="text" class="form-control" id="productImageUrl" [(ngModel)]="product.productImageUrl"
+    <input type="text" class="form-control" id="productImageUrl" formControlName="imageUrl"
            name="productImageUrl"
            placeholder="URL zdjęcia..." required>
   </div>
 
   <hr class="mb-4">
 
-  <button class="btn btn-primary btn-lg btn-block" type="submit">Add Product</button>
+  <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!productForm.valid">Add Product</button>
 </form>

@@ -17,7 +17,7 @@
         <div class="panel-body">
           <div *ngFor="let product of cartProducts">
             <div class="row">
-              <div class="col-xs-2"><img class="img-responsive" src="{{product.productImageUrl}}">
+              <div class="col-xs-2"><img class="img-responsive" src="{{product.imageUrl}}">
               </div>
               <div class="col-xs-4">
                 <h4 class="product-name"><strong>{{product.productName}}</strong></h4>
@@ -30,7 +30,7 @@
                   <h6><strong>{{product.productPrice}}<span class="text-muted">x</span></strong></h6>
                 </div>
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-sm" value="{{product.productQuatity}}">
+                  <input type="text" class="form-control input-sm" value="{{product.quantity}}">
                 </div>
                 <div class="col-xs-2">
                   <a placement="top" mdbTooltip="Usuń produkt" container="body" (click)="removeCartProduct(product)">

@@ -1,9 +1,16 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { Product } from '../models/product';
-import { ToastrService } from './toastr.service';
+import {
+  AngularFireList,
+  AngularFireObject,
+  AngularFireDatabase
+} from "angularfire2/database";
+import { Injectable } from "@angular/core";
+import {Product} from "../models/product";
+import {ToastrService} from "./toastr.service";
 
-@Injectable()
+
+@Injectable({
+  providedIn: "root"
+})
 export class ProductService {
   products: AngularFireList<Product>;
   product: AngularFireObject<Product>;
@@ -24,8 +31,9 @@ export class ProductService {
   }
 
   createProduct(data: Product) {
-    this.toastrService.info("quantity",data.productQuatity);
-    this.products.push(data);
+    var test = new Product();
+    test.quantity=5;
+    this.products.push(test);
   }
 
   getProductById(key: string) {
@@ -43,12 +51,12 @@ export class ProductService {
 
   addToCart(data: Product): void {
     var copiedProduct = new Product();
-    copiedProduct.productName = data.productName;
-    copiedProduct.productCategory = data.productCategory;
-    copiedProduct.productQuatity = 1;
-    copiedProduct.productDescription = data.productDescription;
+    copiedProduct.name = data.name;
+    copiedProduct.category = data.category;
+    copiedProduct.quantity = 1;
+    copiedProduct.description = data.description;
     copiedProduct.productId = data.productId;
-    copiedProduct.productImageUrl = data.productImageUrl;
+    copiedProduct.imageUrl = data.imageUrl;
 
     let a: Product[];
     a = JSON.parse(localStorage.getItem('avct_item')) || [];
@@ -56,7 +64,7 @@ export class ProductService {
     var found = false;
     for (let i = 0; i < a.length; i++) {
       if (a[i].productId === data.productId) {
-        a[i].productQuatity++;
+        a[i].quantity++;
         found = true;
         break;
       }
@@ -76,10 +84,10 @@ export class ProductService {
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].productId === product.productId) {
-        if (products[i].productQuatity === 1) {
+        if (products[i].quantity === 1) {
           products.splice(i, 1);
         } else {
-          products[i].productQuatity--;
+          products[i].quantity--;
         }
 				break;
 			}
@@ -98,7 +106,7 @@ export class ProductService {
     var counter = 0;
     const products: Product[] = JSON.parse(localStorage.getItem('avct_item')) || [];
     products.forEach((product) => {
-      counter += product.productQuatity;
+      counter += product.quantity;
     });
     this.navbarCartCount = counter;
 	}

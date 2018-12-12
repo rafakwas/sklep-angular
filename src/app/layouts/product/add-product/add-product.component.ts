@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {NgForm, FormGroup, Validators, FormControl} from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product';
+import {ToastrService} from "../../../shared/services/toastr.service";
 
 declare var $: any;
 declare var require: any;
@@ -17,28 +18,37 @@ const moment = require('moment');
 })
 export class AddProductComponent implements OnInit {
 
-  product: Product = new Product();
-  constructor(private productService: ProductService) {}
+  productForm : FormGroup;
+  constructor(private productService: ProductService, private toastrService: ToastrService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.productForm = this.createFormGroup();
+  }
 
-  createProduct(productForm: NgForm) {
-    productForm.value['productId'] = 'PROD_' + shortId.generate();
-    productForm.value['productAdded'] = moment().unix();
-    productForm.value['ratings'] = Math.floor(Math.random() * 5 + 1);
-    if (productForm.value['productImageUrl'] === undefined) {
-      productForm.value['productImageUrl'] = 'http://via.placeholder.com/640x360/007bff/ffffff';
-    }
+  createFormGroup() {
+    return new FormGroup({
+      name: new FormControl('',[Validators.required,Validators.minLength(2)]),
+      category: new FormControl('',[Validators.required,Validators.minLength(2)]),
+      price: new FormControl('',Validators.required),
+      description: new FormControl('',Validators.required),
+      imageUrl: new FormControl('',[Validators.required]),
+      quantity: new FormControl('',[Validators.required,Validators.min(1)])
+    });
+  }
 
-    productForm.value['favourite'] = false;
-
-    const date = productForm.value['productAdded'];
-
-    this.productService.createProduct(productForm.value);
-
-    this.product = new Product();
-
-    toastr.success('product ' + productForm.value['productName'] + 'is added successfully', 'Product Creation');
+  createProduct() {
+    var product = new Product();
+    product.name = this.productForm.value['name'];
+    product.category = this.productForm.value['category'];
+    product.price = this.productForm.value['price'];
+    product.description = this.productForm.value['description'];
+    product.imageUrl =this.productForm.value['imageUrl'];
+    product.quantity = this.productForm.value['quantity'];
+    this.toastrService.info("produkt from form", product.quantity);
+    product.productId = 'PROD_' + shortId.generate();
+    product.productAdded = moment().unix();
+    this.productService.createProduct(product);
+    toastr.success('product ' + product + 'is added successfully', 'Product Creation');
   }
 
 }
