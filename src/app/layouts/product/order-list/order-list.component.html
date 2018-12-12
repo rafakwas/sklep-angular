@@ -1,17 +1,66 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4 mb-2" *ngFor="let order of orderList">
-      <div class="item">
-        <div class=" mb-r">
-          <!--Card-->
-          <div class="card card-cascade  card-ecommerce wider">
-              <div class="card-body card-body-cascade text-center">
-              <h5>{{ order.totalPrice }}</h5>
-              <h4 class="card-title"><strong><a href=""> {{order.status }} </a></strong></h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+  <thead>
+  <tr>
+    <th class="th-sm">email
+    </th>
+    <th class="th-sm">miasto
+    </th>
+    <th class="th-sm">adres
+    </th>
+    <th class="th-sm">telefon
+    </th>
+    <th class="th-sm">suma
+    </th>
+    <th class="th-sm">status
+    </th>
+    <th class="th-sm">data wysyłki
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of orderList">
+      <td>
+        {{item.email}}
+      </td>
+    <td>
+      {{item.city}}
+    </td>
+    <td>
+      {{item.address}}
+    </td>
+    <td>
+      {{item.phone}}
+    </td>
+    <td>
+      {{item.totalPrice}}
+    </td>
+    <td>
+      {{item.status}}
+    </td>
+    <td>
+      {{item.sendDate}}
+    </td>
+    <td>
+        <button class="btn btn-success btn-lg btn-block" [hidden]="item.status === getCompletedOrderStatus()" (click)="completeOrder(item)">Dokończ zamówienie</button>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <th class="th-sm">email
+    </th>
+    <th class="th-sm">city
+    </th>
+    <th class="th-sm">address
+    </th>
+    <th class="th-sm">phone
+    </th>
+    <th class="th-sm">price
+    </th>
+    <th class="th-sm">status
+    </th>
+    <th class="th-sm">send date
+    </th>
+  </tr>
+  </tfoot>
+</table>

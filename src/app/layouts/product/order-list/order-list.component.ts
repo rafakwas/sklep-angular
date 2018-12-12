@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Order} from "../../../shared/models/order";
+import {Order, OrderStatus} from "../../../shared/models/order";
 import {OrderService} from "../../../shared/services/order.service";
 import {ToastrService} from "../../../shared/services/toastr.service";
 
@@ -35,4 +35,11 @@ export class OrderListComponent implements OnInit {
     );
   }
 
+  completeOrder(order : Order) {
+    this.toastrService.info("clicked","!");
+  }
+
+  getCompletedOrderStatus() {
+    return OrderStatus.COMPLETED;
+  }
 }
