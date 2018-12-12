@@ -47,7 +47,6 @@ export class CheckoutComponent implements OnInit {
     var order = this.orderForm.value;
     order.products = this.productService.getLocalCartProducts();
     order.status = OrderStatus.AWAITING;
-
     let totalPrice = 0;
     let cartProducts = this.productService.getLocalCartProducts();
     cartProducts.forEach((product) => {
