@@ -21,6 +21,7 @@ export class ProductService {
     private db: AngularFireDatabase,
     private toastrService: ToastrService
   ) {
+    this.getProducts();
 		this.calculateLocalCartProdCounts();
 	}
 
@@ -31,9 +32,7 @@ export class ProductService {
   }
 
   createProduct(data: Product) {
-    var test = new Product();
-    test.quantity=5;
-    this.products.push(test);
+    this.products.push(data);
   }
 
   getProductById(key: string) {
