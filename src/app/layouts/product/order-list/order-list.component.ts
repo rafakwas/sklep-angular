@@ -5,6 +5,7 @@ import {ToastrService} from "../../../shared/services/toastr.service";
 import {plainToClass, deserialize} from "class-transformer";
 import {OrderProduct} from "../../../shared/models/orderProduct";
 import {Observable} from "rxjs";
+import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-order-list',
@@ -15,7 +16,7 @@ export class OrderListComponent implements OnInit {
 
   orderList: Observable<Order[]>;
 
-  constructor(private orderService : OrderService, private toastrService : ToastrService) { }
+  constructor(private orderService : OrderService, private toastrService : ToastrService, private productService : ProductService) { }
 
   ngOnInit() {
     this.getAllOrders();
@@ -27,21 +28,19 @@ export class OrderListComponent implements OnInit {
 
   completeOrder(order : Order) {
     this.orderService.realizeOrder(order);
-    // order.status = OrderStatus.COMPLETED;
-    // order.sendDate = new Date();
-    // var orderProducts = [];
-    // orderProducts = Object.assign({},order.products);
-    // this.toastrService.info("sprawdzenie",orderProducts);
-    // orderProducts.forEach((orderProduct) => {1
-    //   this.toastrService.info("hello","hlelo");
-    //
+  }
+
+  canSubmitAll(order : Order) {
+    // order.products.forEach((orderProduct) => {
+    //   let orderQuantity = orderProduct.product.quantity;
+    //   let actualProduct = this.productService.getProduct(orderProduct.product.id);
+    //   let actualQuantity = actualProduct.quantity;
+    //   this.toastrService.info("jestem tu","hehe");
+    //   if (actualQuantity > orderQuantity) {
+    //     return false;
+    //   }
     // });
-      // products = JSON.parse(JSON.stringify(order.products));
-    // products.forEach((orderProduct) => {
-    //   orderProduct.isChecked = true;
-    // });
-    // order.products = Object.assign({},products);
-    // this.orderService.updateOrder(order);
+    // return true;
   }
 
   getCompletedOrderStatus() {
