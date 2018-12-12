@@ -1,3 +1,9 @@
+<div class="btn-group mb-4 center" role="group" aria-label="Basic example">
+  <button type="button" (click)="filter('OCZEKUJĄCE')" class="btn btn-primary">Oczekujące</button>
+  <button type="button" (click)="filter('W TRAKCIE')" class="btn btn-primary">W trakcie realizacji</button>
+  <button type="button" (click)="filter('SKOMPLETOWANE')" class="btn btn-primary">Zrealizowane</button>
+</div>
+
 <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
   <thead>
   <tr>
@@ -19,9 +25,9 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of orderList | async">
-      <td>
-        {{item.email}}
-      </td>
+    <td>
+      {{item.email}}
+    </td>
     <td>
       {{item.city}}
     </td>
@@ -41,7 +47,14 @@
       {{item.sendDate}}
     </td>
     <td>
-        <button class="btn btn-success btn-block" [disabled]="false" [hidden]="item.status === getCompletedOrderStatus()" (click)="completeOrder(item)">Dokończ zamówienie</button>
+      <button class="btn btn-primary btn-block">
+        Szczegóły zamówienia
+      </button>
+    </td>
+    <td>
+      <button class="btn btn-success btn-block" [disabled]="false" [hidden]="item.status === getCompletedOrderStatus()"
+              (click)="completeOrder(item)">Dokończ zamówienie
+      </button>
     </td>
   </tr>
   </tbody>

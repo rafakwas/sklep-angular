@@ -20,6 +20,11 @@ export class OrderService {
     return db.valueChanges();
   }
 
+  getOrders(orderStatus: OrderStatus): Observable<any[]> {
+    const db = this.db.collection('/order', ref => ref.where('status','==',orderStatus));
+    return db.valueChanges();
+  }
+
   updateOrder(order: Order) {
     this.db.collection('/order').doc(order.id).set(Object.assign({}, order))
       .then(function() {
@@ -46,7 +51,6 @@ export class OrderService {
   }
 
   realizeOrder(order: Order) {
-    order.products.filter(x => !x.isChecked).forEach(productOrder => this.realizeProduct(productOrder));
     console.log("Produkty w obrębie zamówienia zrealizowane");
     if (order.products.filter(x => !x.isChecked).length > 0) {
       console.log("Znalazły się produkty, których nie ma na stanie");

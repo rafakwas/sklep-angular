@@ -15,19 +15,25 @@ import {ProductService} from "../../../shared/services/product.service";
 export class OrderListComponent implements OnInit {
 
   orderList: Observable<Order[]>;
+  status = OrderStatus.AWAITING;
 
   constructor(private orderService : OrderService, private toastrService : ToastrService, private productService : ProductService) { }
 
   ngOnInit() {
-    this.getAllOrders();
+    this.orderList = this.orderService.getOrders(this.status);
   }
 
-  getAllOrders() {
-    this.orderList = this.orderService.getOrders();
+  getOrders() {
+    this.orderList = this.orderService.getOrders(this.status);
   }
 
   completeOrder(order : Order) {
     this.orderService.realizeOrder(order);
+  }
+
+  filter(orderStatus : OrderStatus) {
+    this.status = orderStatus;
+    this.getOrders();
   }
 
   canSubmitAll(order : Order) {
