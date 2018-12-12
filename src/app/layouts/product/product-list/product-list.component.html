@@ -51,16 +51,16 @@
 
             <div class="card-body card-body-cascade text-center">
               <!--Category & Title-->
-              <h5>{{ product.productCategory }}</h5>
-              <h4 class="card-title"><strong><a href=""> {{product.productName }} </a></strong></h4>
+              <h5>{{ product.category }}</h5>
+              <h4 class="card-title"><strong><a href=""> {{product.name }} </a></strong></h4>
 
               <!--Description-->
-              <p class="card-text">{{ product.productDescription }}</p>
+              <p class="card-text">{{ product.description }}</p>
 
               <!--Card footer-->
               <div class="container" *ngIf="isProductAvailable(product)">
                 <div class="card-footer">
-                  <span class="float-left">{{ product.productPrice }} PLN</span>
+                  <span class="float-left">{{ product.price }} PLN</span>
                   <span class="float-right">
                     <a  class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka"
                         (click)="addToCart(product)"><i class="fa fa-cart-plus"

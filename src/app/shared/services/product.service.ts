@@ -56,6 +56,8 @@ export class ProductService {
     copiedProduct.description = data.description;
     copiedProduct.productId = data.productId;
     copiedProduct.imageUrl = data.imageUrl;
+    copiedProduct.price = data.price;
+    copiedProduct.productAdded = data.productAdded;
 
     let a: Product[];
     a = JSON.parse(localStorage.getItem('avct_item')) || [];
