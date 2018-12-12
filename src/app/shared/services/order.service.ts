@@ -46,6 +46,7 @@ export class OrderService {
       result.phone,
       totalSum,
       orderProduct);
+    order.id = this.db.createId();
     this.updateOrder(order);
   }
 }

@@ -44,7 +44,6 @@ export class AddProductComponent implements OnInit {
     product.description = this.productForm.value['description'];
     product.imageUrl =this.productForm.value['imageUrl'];
     product.quantity = this.productForm.value['quantity'];
-    product.id = 'PROD_' + shortId.generate();
     product.productAdded = moment().unix();
     this.productService.createProduct(product);
     toastr.success('product ' + product + 'is added successfully', 'Product Creation');

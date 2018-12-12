@@ -19,6 +19,7 @@ export class ProductService implements OnInit {
   }
 
   createProduct(product: Product) {
+    product.id = this.db.createId();
     this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
       .then(function() {
         console.log('Product successfully added:', product);

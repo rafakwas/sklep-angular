@@ -1,6 +1,4 @@
-import {Product} from "./product";
 import {OrderProduct} from "./orderProduct";
-const shortId = require('shortid');
 
 export enum OrderStatus {
   AWAITING = "OCZEKUJĄCE",
@@ -32,7 +30,6 @@ export class Order {
               totalPrice: number,
               products: OrderProduct[]
   ) {
-    this.id = 'ORDER' + shortId.generate();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
