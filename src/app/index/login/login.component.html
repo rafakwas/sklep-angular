@@ -4,8 +4,9 @@
   <!-- Login form -->
   <div class="col-sm-6">
     <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+      <p class="h5 text-center mb-4">Zaloguj się</p>
       <div class="form-row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="md-form mb-0">
             <input type="text" id="email" name="email" class="form-control" formControlName="email" placeholder="Email">
             <div *ngIf="loginForm.controls['email'].errors" class="alert alert-danger">
@@ -16,7 +17,7 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="md-form mb-0">
             <input type="text" id="loginPassword" class="form-control" formControlName="loginPassword"
                    placeholder="Hasło">
@@ -27,8 +28,10 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!loginForm.valid">Zaloguj się
-        </button>
+
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary waves-light" type="submit" [disabled]="!loginForm.valid">Zaloguj się</button>
       </div>
     </form>
   </div>
