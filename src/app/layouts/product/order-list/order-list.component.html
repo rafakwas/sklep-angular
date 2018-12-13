@@ -62,9 +62,6 @@
     </td>
 
 
-
-
-
     <div class="modal fade" id="completingOrderDatatable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
       <div class="modal-dialog cascading-modal" role="document">
@@ -77,33 +74,45 @@
               </button>
             </div>
             <div class="modal-body">
+              <table id="innerOrderItems" class="table table-striped" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                  <th class="th-sm">skompletowany
+                  </th>
+                  <th class="th-sm">nazwa
+                  </th>
+                  <th class="th-sm">ilość
+                  </th>
+                  <th class="th-sm">cena jednostkowa
+                  </th>
+                  <th class="th-sm">kompletuj przedmiot
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let orderProduct of item.products">
+                  <td>
+                    {{orderProduct.isChecked}}
+                  </td>
+                  <td>
+                    {{orderProduct.product.name}}
+                  </td>
+                  <td>
+                    {{orderProduct.product.quantity}}
+                  </td>
+                  <td>
+                    {{orderProduct.product.price}}
+                  </td>
+                  <button class="btn btn-success btn-block" [disabled]="false" [hidden]="orderProduct.isChecked"
+                          (click)="completeOrderSingleItem(item,orderProduct)">Skompletuj przedmiot
+                  </button>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   </tr>
