@@ -4,6 +4,8 @@ import { ProductService } from '../../../shared/services/product.service';
 import { ToastrService } from 'src/app/shared/services/toastr.service';
 import {Observable} from "rxjs";
 import {CartService} from "../../../shared/services/cart.service";
+import {AuthService} from "../../../shared/services/auth.service";
+import {FormGroup, Validators, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-product-list',
@@ -21,14 +23,29 @@ export class ProductListComponent implements OnInit {
   upperPriceBound : number;
   page = 1;
 
+  editForm : FormGroup;
+
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public authService : AuthService,
   ) {}
+
 
   ngOnInit() {
     this.productList = this.productService.getProducts();
+    this.editForm = this.createEditProductFormGroup();
+  }
+
+  createEditProductFormGroup() {
+    return new FormGroup({
+      quantity: new FormControl('',[Validators.required,Validators.min(1)])
+    });
+  }
+
+  edit() {
+    this.toastrService.info("edutujemy","jupi");
   }
 
   addToCart(product: Product) {
@@ -46,6 +63,10 @@ export class ProductListComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  getAuthService() {
+    return this.authService;
   }
 
 }

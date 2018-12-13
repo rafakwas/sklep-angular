@@ -58,22 +58,66 @@
               <p class="card-text">{{ product.description }}</p>
 
               <!--Card footer-->
-              <div class="container" *ngIf="isProductAvailable(product)">
+              <div class="container">
                 <div class="card-footer">
                   <span class="float-left">{{ product.price }} PLN</span>
                   <span class="float-right">
-                    <a  class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka"
+                    <a  class="active" data-toggle="modal" data-target="#editProduct" data-placement="top" title="Edytuj" *ngIf="getAuthService().hasAdminPermissions()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    <a  class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka" *ngIf="isProductAvailable(product)"
                         (click)="addToCart(product)"><i class="fa fa-cart-plus"
                                                         aria-hidden="true"></i></a>
                   </span>
                 </div>
-              </div>
+              <!--</div>-->
             </div>
           </div>
         </div>
       </div>
+
+
+
+
+
+
+      <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+          <form [formGroup]="editForm" (ngSubmit)="edit()">
+            <div class="modal-content">
+              <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title">
+                  <i class="fa fa-edit"></i> Edycja produktu </h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group form-sm">
+                </div>
+                <div class="form-group form-sm">
+                </div>
+                <div class="form-group form-sm">
+                </div>
+                <div class="text-center mt-2">
+                  <button class="btn btn-info waves-light" id="editButton" mdbRippleRadius>Zatwierdź<i class="fa fa-sign-in ml-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
     </div>
   </div>
+
   <div class="row">
     <div class="text-center mt-3">
       <pagination-controls (pageChange)="page = $event"></pagination-controls>
