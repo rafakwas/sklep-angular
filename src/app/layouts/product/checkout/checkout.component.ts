@@ -7,6 +7,7 @@ import {OrderService} from "../../../shared/services/order.service";
 import {Router} from "@angular/router";
 import {OrderProduct} from "../../../shared/models/orderProduct";
 import {CartService} from "../../../shared/services/cart.service";
+import {AuthService} from "../../../shared/services/auth.service";
 
 declare var $: any;
 declare var require: any;
@@ -28,6 +29,7 @@ export class CheckoutComponent implements OnInit {
     private productService: ProductService,
     private orderService: OrderService,
     private cartService: CartService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -53,7 +55,7 @@ export class CheckoutComponent implements OnInit {
     let totalPrice = this.cartService.calculateCartProductsPrice();
     this.orderService.makeOrder(order,cartProducts,totalPrice);
     this.cartService.freeLocalCart();
-    toastr.success('order to ' + order.email + 'is set successfully', 'Order creation');
+    toastr.success('Zamówienie do ' + order.email + ' zostało złożone', 'Tworzenie zamówienia');
     this.router.navigateByUrl('/products/all-products');
   }
 

@@ -21,7 +21,9 @@ import { CdkTreeModule } from "@angular/cdk/tree";
 import {FirebaseConfig} from "../../environments/firebase";
 import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderService} from "./services/order.service";
-import {CartService} from "./services/cart.service"; // <-- import the module
+import {CartService} from "./services/cart.service";
+import {AuthService} from "./services/auth.service";
+import {AdminGuard} from "./services/admin-gaurd";
 
 @NgModule({
 	imports: [
@@ -58,6 +60,6 @@ import {CartService} from "./services/cart.service"; // <-- import the module
 		CdkTreeModule,
 		DragDropModule, ScrollingModule
 	],
-	providers: [ProductService, OrderService, CartService, FormBuilder]
+	providers: [ProductService, OrderService, CartService, FormBuilder, AuthService, AdminGuard]
 })
 export class SharedModule { }

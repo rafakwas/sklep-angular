@@ -8,6 +8,7 @@ export enum OrderStatus {
 
 export class Order {
   id: string;
+  userId: string;
   firstname: string;
   lastname: string;
   email: string;
@@ -20,7 +21,8 @@ export class Order {
   sendDate: Date;
   products: OrderProduct[];
 
-  constructor(firstname: string,
+  constructor(userId: string,
+              firstname: string,
               lastname: string,
               email: string,
               address: string,
@@ -30,6 +32,7 @@ export class Order {
               totalPrice: number,
               products: OrderProduct[]
   ) {
+    this.userId = userId;
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;

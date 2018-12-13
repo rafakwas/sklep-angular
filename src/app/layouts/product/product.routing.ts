@@ -5,6 +5,7 @@ import {AddProductComponent} from "./add-product/add-product.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {OrderListComponent} from "./order-list/order-list.component";
+import {AdminGuard} from "../../shared/services/admin-gaurd";
 
 export const ProductRoutes: Routes = [
 	{
@@ -20,7 +21,8 @@ export const ProductRoutes: Routes = [
 			},
       {
         path: 'add-product',
-        component: AddProductComponent
+        component: AddProductComponent,
+        // canActivate: AdminGuard
       },
       {
         path: 'shopping-cart',

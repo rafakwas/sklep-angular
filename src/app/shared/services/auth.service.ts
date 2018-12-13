@@ -31,7 +31,7 @@ export class AuthService {
         this.userData.subscribe(data => {
           console.log('User data got', data);
           if (data) {
-            this.data = new UserData(data.id, data.email, data.username, data.address, data.role);
+            this.data = new UserData(data.id, data.email, data.username, data.role);
           } else {
             console.log('Not user data provided');
           }
@@ -46,12 +46,12 @@ export class AuthService {
   register(customer: Customer) {
     this.fireAuth.auth.createUserWithEmailAndPassword(customer.email, customer.password)
       .then(value => {
-        console.log('Zarejestrowano pomyślnie w Firebase!', value);
         customer.id = value.user.uid;
+        this.toastService.success("Pomyślnie zarejestrowałeś się!",customer.id);
         this.addUserData(customer);
       })
       .catch(error => {
-        console.log('Nie udało się zarejestrować', error.message);
+        this.toastService.error('Wystąpił błąd podczas rejestracji', error.message);
       });
   }
 
@@ -68,18 +68,16 @@ export class AuthService {
   signIn(email: string, password: string) {
     this.fireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((res) => {
-        this.toastService.success("Authentication Success", "Logging in please wait");
+        this.toastService.success("Autoryzacja powiodła się", "");
 
         const returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
 
         setTimeout((router: Router) => {
-          this.router.navigate([returnUrl || "/"]);
+          this.router.navigate(["/products/all-products"]);
         }, 1500);
-
-        this.router.navigate(["/"]);
       })
       .catch((err) => {
-        this.toastService.error("Authentication Failed", "Invalid Credentials, Please Check your credentials");
+        this.toastService.error("Autoryzacja nie powiodła się", "Nieprawidłowe dane");
       });
   }
 
@@ -90,10 +88,10 @@ export class AuthService {
   signOut() {
     this.fireAuth.auth.signOut()
       .then(value => {
-        console.log('Wylogowano pomyślnie', value);
+        this.toastService.success("Wylogowałeś się","");
       })
       .catch(error => {
-        console.log('Nie udało się wylogować', error.message);
+        this.toastService.error('Nie udało się wylogować', error.message);
       });
   }
 
@@ -108,8 +106,11 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
-  getSignedInUserData() {
-    return this.data;
+  hasManagerPermissions() {
+    return this.isSignedIn && (this.isRole('MANAGER') || this.isRole('ADMIN'));
   }
 
+  hasAdminPermissions() {
+    return this.isSignedIn && this.isRole('ADMIN');
+  }
 }

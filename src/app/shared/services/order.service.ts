@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 import {ProductService} from "./product.service";
 import {Product} from "../models/product";
 import {OrderProduct} from "../models/orderProduct";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -12,13 +13,15 @@ import {OrderProduct} from "../models/orderProduct";
 export class OrderService {
 
   constructor(private db: AngularFirestore,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              private authService: AuthService
+  ) { }
 
 
-  getOrders() : Observable<any> {
-    const db = this.db.collection('/order');
-    return db.valueChanges();
-  }
+  // getOrders() : Observable<any> {
+  //   const db = this.db.collection('/order');
+  //   return db.valueChanges();
+  // }
 
   getOrders(orderStatus: OrderStatus): Observable<any[]> {
     const db = this.db.collection('/order', ref => ref.where('status','==',orderStatus));
@@ -65,7 +68,12 @@ export class OrderService {
 
   makeOrder(result: any, basket: Product[], totalSum: number) {
     const orderProduct = basket.map(basketItem => Object.assign({}, new OrderProduct(false, basketItem)));
+    var userId = null;
+    if (this.authService.isSignedIn()) {
+      userId = this.authService.data.id;
+    }
     const order = new Order(
+      userId,
       result.firstname,
       result.lastname,
       result.email,
