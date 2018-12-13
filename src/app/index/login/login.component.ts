@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import {ToastrService} from "../../shared/services/toastr.service";
 import {AuthService} from "../../shared/services/auth.service";
 import {Customer} from "../../shared/models/customer";
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -15,17 +16,14 @@ export class LoginComponent implements OnInit {
 
   credentials = {
     email: "",
-    loginPassword: ""
+    loginPassword: "",
   };
 
   registration = {
     registerEmail: "",
-    registerPassword: ""
+    registerPassword: "",
+    username: ""
   };
-
-  errorInUserCreate = false;
-  errorMessage: any;
-  customer : Customer;
 
   loginForm : FormGroup;
   registerForm : FormGroup;
@@ -54,14 +52,17 @@ export class LoginComponent implements OnInit {
     return new FormGroup({
       registerEmail: new FormControl('',[Validators.required,Validators.email]),
       registerPassword: new FormControl('',[Validators.required]),
+      username: new FormControl('',[Validators.required]),
     });
   }
 
   register() {
     this.registration = this.registerForm.value;
-    this.authService.register(new Customer(null, this.registration.registerEmail, this.registration.registerPassword, "laala" , "kolbu"));
-
-  }
+    this.authService.register(new Customer(null, this.registration.registerEmail, this.registration.registerPassword, this.registration.username));
+    setTimeout((router: Router) => {
+      $("#createUserForm").modal("hide");
+      this.router.navigate(["/login"]);
+    }, 1500);  }
 
   signIn() {
     this.credentials = this.loginForm.value;

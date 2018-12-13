@@ -70,6 +70,13 @@
                 <div [hidden]="!registerForm.controls['registerPassword'].errors.required">*Proszę podać hasło</div>
               </div>
             </div>
+            <div class="form-group form-sm">
+              <input type="text" id="username" class="form-control" formControlName="username"
+                     placeholder="Nazwa użytkownika">
+              <div *ngIf="registerForm.controls['username'].errors" class="alert alert-danger">
+                <div [hidden]="!registerForm.controls['username'].errors.required">*Proszę podać swój login</div>
+              </div>
+            </div>
             <div class="text-center mt-2">
               <button class="btn btn-info waves-light" id="signUpButton" mdbRippleRadius>Zarejestruj się
                 <i class="fa fa-sign-in ml-1"></i>
