@@ -93,14 +93,14 @@
                     <div class="col-md-6 mb-3">
                       <label for="name">Nazwa produktu</label>
                       <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                             placeholder="nazwa"
+                             placeholder={{product.name}}
                              value="" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="category">Kategoria</label>
                       <input type="text" class="form-control" id="category" name="category"
                              formControlName="category"
-                             placeholder="kategoria" value="" required>
+                             placeholder={{product.category}} value="" required>
                     </div>
                   </div>
 
@@ -108,7 +108,7 @@
                     <label for="description">Opis
                       <span class="text-muted">(opcjonalny)</span>
                     </label>
-                    <textarea type="text" class="form-control" id="description" placeholder="Tutaj opis..."
+                    <textarea type="text" class="form-control" id="description" placeholder={{product.description}}
                               name="description"
                               formControlName="description"></textarea>
                   </div>
@@ -117,7 +117,7 @@
                     <div class="col-md-6 mb-3">
                       <label for="price">Cena</label>
                       <input type="number" name="price" class="form-control" formControlName="price"
-                             placeholder="cena"
+                             placeholder={{product.price}}
                              id="price" value="" required>
                       <div class="invalid-feedback">
                         Cena jest wymagana
@@ -126,7 +126,7 @@
                     <div class="col-md-6 mb-3">
                       <label for="quantity">Ilość</label>
                       <input type="number" class="form-control" id="quantity" name="quantity"
-                             formControlName="quantity" placeholder="ilość"
+                             formControlName="quantity" placeholder={{product.quantity}}
                              value="" required>
                       <div class="invalid-feedback">
                         Ilość jest wymagana
@@ -138,7 +138,7 @@
                     <label for="imageUrl">Zdjęcie</label>
                     <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl"
                            name="imageUrl"
-                           placeholder="URL zdjęcia..." required>
+                           placeholder={{product.imageUrl}} required>
                   </div>
 
 
