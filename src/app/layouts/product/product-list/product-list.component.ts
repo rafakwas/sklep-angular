@@ -6,6 +6,8 @@ import {Observable} from "rxjs";
 import {CartService} from "../../../shared/services/cart.service";
 import {AuthService} from "../../../shared/services/auth.service";
 import {FormGroup, Validators, FormControl} from "@angular/forms";
+import {Router, ActivatedRoute} from "@angular/router";
+declare var $: any;
 
 @Component({
   selector: 'app-product-list',
@@ -30,6 +32,8 @@ export class ProductListComponent implements OnInit {
     private cartService: CartService,
     private toastrService: ToastrService,
     public authService : AuthService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
 
@@ -40,12 +44,30 @@ export class ProductListComponent implements OnInit {
 
   createEditProductFormGroup() {
     return new FormGroup({
+      name: new FormControl('',[Validators.required,Validators.minLength(2)]),
+      category: new FormControl('',[Validators.required,Validators.minLength(2)]),
+      price: new FormControl('',Validators.required),
+      description: new FormControl('',Validators.required),
+      imageUrl: new FormControl('',[Validators.required]),
       quantity: new FormControl('',[Validators.required,Validators.min(1)])
     });
   }
 
-  edit() {
-    this.toastrService.info("edutujemy","jupi");
+  edit(product : Product) {
+    product.name = this.editForm.value['name'];
+    product.category = this.editForm.value['category'];
+    product.price = this.editForm.value['price'];
+    product.description = this.editForm.value['description'];
+    product.imageUrl =this.editForm.value['imageUrl'];
+    product.quantity = this.editForm.value['quantity'];
+
+    this.productService.updateProduct(product);
+    this.editForm = this.createEditProductFormGroup();
+
+    setTimeout((router: Router) => {
+      $("#editProduct").modal("hide");
+      this.router.navigate(["/products/all-products"]);
+    }, 500);
   }
 
   addToCart(product: Product) {
