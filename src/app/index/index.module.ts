@@ -9,10 +9,12 @@ import { ProductModule } from '../layouts/product/product.module';
 import { IndexComponent } from './index.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {LoginComponent} from "./login/login.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  imports: [ CommonModule, ProductModule,RouterModule.forChild(IndexRoutes) ],
-  declarations: [ IndexComponent, NavbarComponent, FooterComponent ],
+  imports: [ CommonModule, ProductModule,RouterModule.forChild(IndexRoutes), ReactiveFormsModule ],
+  declarations: [ IndexComponent, NavbarComponent, FooterComponent, LoginComponent ],
   schemas: [ NO_ERRORS_SCHEMA ],
   exports: [ NavbarComponent, FooterComponent ],
   providers: []
