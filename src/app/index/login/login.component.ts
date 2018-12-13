@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     this.authService.register(new Customer(null, this.registration.registerEmail, this.registration.registerPassword, this.registration.username));
     setTimeout((router: Router) => {
       $("#createUserForm").modal("hide");
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/products/all-products"]);
     }, 1500);  }
 
   signIn() {
