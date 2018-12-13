@@ -6,6 +6,7 @@ import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {OrderListComponent} from "./order-list/order-list.component";
 import {AdminGuard} from "../../shared/services/admin-gaurd";
+import {UserOrdersComponent} from "./user-orders/user-orders.component";
 
 export const ProductRoutes: Routes = [
 	{
@@ -35,8 +36,11 @@ export const ProductRoutes: Routes = [
       {
         path: 'all-orders',
         component: OrderListComponent
+      },
+      {
+        path: 'user-orders',
+        component: UserOrdersComponent
       }
-
     ]
 	}
 ];
