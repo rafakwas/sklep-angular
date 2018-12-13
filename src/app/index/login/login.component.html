@@ -4,7 +4,6 @@
   <!-- Login form -->
   <div class="col-sm-6">
     <form [formGroup]="loginForm" (ngSubmit)="signIn()">
-
       <div class="form-row">
         <div class="col-md-6">
           <div class="md-form mb-0">
@@ -15,64 +14,70 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="form-row">
         <div class="col-md-6">
           <div class="md-form mb-0">
-            <input type="text" id="password" class="form-control" formControlName="password" placeholder="Hasło">
-            <div *ngIf="loginForm.controls['password'].errors" class="alert alert-danger">
-              <div [hidden]="!loginForm.controls['password'].errors.required">*Proszę podać hasło</div>
+            <input type="text" id="loginPassword" class="form-control" formControlName="loginPassword"
+                   placeholder="Hasło">
+            <div *ngIf="loginForm.controls['loginPassword'].errors" class="alert alert-danger">
+              <div [hidden]="!loginForm.controls['loginPassword'].errors.required">*Proszę podać hasło</div>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!loginForm.valid" >Zaloguj się</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!loginForm.valid">Zaloguj się
+        </button>
       </div>
     </form>
   </div>
   <br>
-  <!--<p>New User ?-->
-    <!--<a data-toggle="modal" data-target="#createUserForm" style="color:dodgerblue">Register here!</a>-->
-  <!--</p>-->
-  <!--&lt;!&ndash; Login form &ndash;&gt;-->
 
-  <!--&lt;!&ndash;Modal: Register Form&ndash;&gt;-->
-  <!--<div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-    <!--<div class="modal-dialog cascading-modal" role="document">-->
-      <!--<form #userForm="ngForm" (ngSubmit)="addUser(userForm)">-->
-        <!--<div class="modal-content">-->
 
-          <!--<div class="modal-header light-blue darken-3 white-text">-->
-            <!--<h4 class="title">-->
-              <!--<i class="fa fa-user-plus"></i> Register</h4>-->
-            <!--<button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">-->
-              <!--<span aria-hidden="true">×</span>-->
-            <!--</button>-->
-          <!--</div>-->
-          <!--<div class="modal-body">-->
-            <!--<div class="alert alert-danger" role="alert" *ngIf="errorInUserCreate">-->
-              <!--{{errorMessage.message}}-->
-            <!--</div>-->
-            <!--<div class="form-group form-sm">-->
-              <!--<label for="emailId">Your email</label>-->
-              <!--<input mdbActive type="email" id="emailId" class="form-control" name="emailId" [(ngModel)]="customer.email"-->
-                     <!--placeholder="Enter email" mdbInputValidate [email]="true" autocomplete="email">-->
-            <!--</div>-->
-            <!--<div class="form-group form-sm">-->
-              <!--<label for="password">password</label>-->
-              <!--<input mdbActive type="password" id="password" class="form-control" name="password" [(ngModel)]="customer.password"-->
-                     <!--placeholder="Password" mdbInputValidate autocomplete="new-password">-->
-            <!--</div>-->
-            <!--<div class="text-center mt-2">-->
-              <!--<button class="btn btn-info waves-light" id="signUpButton" mdbRippleRadius>Sign up-->
-                <!--<i class="fa fa-sign-in ml-1"></i>-->
-              <!--</button>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</form>-->
-    <!--</div>-->
-  <!--</div>-->
+  <p>Nie masz jeszcze konta?
+    <a data-toggle="modal" data-target="#createUserForm" style="color:dodgerblue">Zarejestruj się!</a>
+  </p>
+  <!-- Login form -->
+
+  <!--Modal: Register Form-->
+  <div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="modal-content">
+          <div class="modal-header light-blue darken-3 white-text">
+            <h4 class="title">
+              <i class="fa fa-user-plus"></i> Rejestracja</h4>
+            <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group form-sm">
+              <label for="registerEmail">Email</label>
+              <input type="text" id="registerEmail" name="registerEmail" class="form-control" formControlName="registerEmail"
+                     placeholder="Email">
+              <div *ngIf="registerForm.controls['registerEmail'].errors" class="alert alert-danger">
+                <div [hidden]="!registerForm.controls['registerEmail'].errors.required">*Proszę podać email</div>
+                <div [hidden]="!registerForm.controls['registerEmail'].errors.patternMismatch">*Nieprawidłowy adres email</div>
+              </div>
+            </div>
+            <div class="form-group form-sm">
+              <input type="text" id="registerPassword" class="form-control" formControlName="registerPassword"
+                     placeholder="Hasło">
+              <div *ngIf="registerForm.controls['registerPassword'].errors" class="alert alert-danger">
+                <div [hidden]="!registerForm.controls['registerPassword'].errors.required">*Proszę podać hasło</div>
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <button class="btn btn-info waves-light" id="signUpButton" mdbRippleRadius>Zarejestruj się
+                <i class="fa fa-sign-in ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>
-<br>
-<br>
-<br>

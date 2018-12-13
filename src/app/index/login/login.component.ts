@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit {
 
   credentials = {
     email: "",
-    password: ""
+    loginPassword: ""
+  };
+
+  registration = {
+    registerEmail: "",
+    registerPassword: ""
   };
 
   errorInUserCreate = false;
@@ -23,6 +28,7 @@ export class LoginComponent implements OnInit {
   customer : Customer;
 
   loginForm : FormGroup;
+  registerForm : FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -34,22 +40,32 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.createLoginFormGroup();
+    this.registerForm = this.createRegisterFormGroup();
   }
 
   createLoginFormGroup() {
     return new FormGroup({
       email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',[Validators.required]),
+      loginPassword: new FormControl('',[Validators.required]),
     });
   }
 
-  addUser() {
-    this.authService.register(new Customer(null, this.customer.email, this.customer.password, "laala" , "kolbu"));
+  createRegisterFormGroup() {
+    return new FormGroup({
+      registerEmail: new FormControl('',[Validators.required,Validators.email]),
+      registerPassword: new FormControl('',[Validators.required]),
+    });
+  }
+
+  register() {
+    this.registration = this.registerForm.value;
+    this.authService.register(new Customer(null, this.registration.registerEmail, this.registration.registerPassword, "laala" , "kolbu"));
+
   }
 
   signIn() {
     this.credentials = this.loginForm.value;
-    this.authService.signIn(this.credentials.email, this.credentials.password);
+    this.authService.signIn(this.credentials.email, this.credentials.loginPassword);
   }
 
 }
