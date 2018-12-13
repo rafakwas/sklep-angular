@@ -69,12 +69,11 @@ export class AuthService {
     this.fireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((res) => {
         this.toastService.success("Autoryzacja powiodła się", "");
-
         const returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
-
         setTimeout((router: Router) => {
           this.router.navigate(["/products/all-products"]);
         }, 1500);
+        this.isLoggedIn = true;
       })
       .catch((err) => {
         this.toastService.error("Autoryzacja nie powiodła się", "Nieprawidłowe dane");
@@ -89,6 +88,7 @@ export class AuthService {
     this.fireAuth.auth.signOut()
       .then(value => {
         this.toastService.success("Wylogowałeś się","");
+        this.isLoggedIn = false;
       })
       .catch(error => {
         this.toastService.error('Nie udało się wylogować', error.message);
@@ -104,10 +104,6 @@ export class AuthService {
 
   isSignedIn() {
     return this.isLoggedIn;
-  }
-
-  isRegularUser() {
-    return this.isSignedIn && (this.isRole('CUSTOMER'));
   }
 
   hasManagerPermissions() {

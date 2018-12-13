@@ -23,13 +23,13 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="[ '/products/all-products' ]" >Produkty</a>
         </li>
-        <li class="nav-item" *ngIf="authService.hasAdminPermissions()">
+        <li class="nav-item" *ngIf="authService.isSignedIn() && authService.isRole('ADMIN')">
           <a class="nav-link" [routerLink]="[ '/products/add-product' ]">Dodaj produkt</a>
         </li>
-        <li class="nav-item" *ngIf="authService.hasManagerPermissions()">
+        <li class="nav-item" *ngIf="authService.isSignedIn() && (authService.isRole('ADMIN') || authService.isRole('MANAGER'))">
           <a class="nav-link" [routerLink]="[ '/products/all-orders' ]">Sprawdź zamówienia</a>
         </li>
-        <li class="nav-item" *ngIf="authService.isRegularUser()">
+        <li class="nav-item" *ngIf="authService.isSignedIn() && authService.isRole('CUSTOMER')">
           <a class="nav-link" [routerLink]="[ '/products/user-orders' ]">Moje zamówienia</a>
         </li>
       </ul>
@@ -40,13 +40,13 @@
         <a class="nav-link" [routerLink]="[ '/login' ]">
           <i class="fa fa-sign-in mr-1"></i> Zaloguj się </a>
       </li>
-      <li class="nav-item" *ngIf="authService.isSignedIn()">
+      <li class="nav-item" *ngIf="authService.isSignedIn()">t
         <a class="nav-link" (click)="logout()">
           <i class="fa fa-sign-in mr-1"></i>{{authService.data.username}} Wyloguj się</a>
       </li>
       <li class="nav-item">
         <div>
-          <a class="nav-link" [routerLink]="['/products/shopping-cart']">
+          <a class="nav-link" [routerLink]="['/products/shopping-cart']" *ngIf="!authService.isSignedIn() || authService.isRole('CUSTOMER')">
             <i class="fa fa-shopping-cart">
               <span class="mt-2"> {{cartService.getItemsCounter()}}</span>
             </i>
