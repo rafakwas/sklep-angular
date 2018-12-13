@@ -3,13 +3,14 @@ import {AngularFirestore, CollectionReference, Query, QueryFn} from 'angularfire
 import {Observable} from 'rxjs';
 import {Product} from "../models/product";
 import {CartService} from "./cart.service";
+import {ToastrService} from "./toastr.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProductService implements OnInit {
 
-  constructor(private db: AngularFirestore, private cartService : CartService) { }
+  constructor(private db: AngularFirestore, private cartService : CartService, private toastrService : ToastrService) { }
 
   ngOnInit() {
   }
@@ -30,7 +31,7 @@ export class ProductService implements OnInit {
   updateProduct(product : Product) {
     this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
       .then(function() {
-        console.log('product successfully updated:', product);
+        this.toastrService.success("Produkt zaktualizowany!");
       });
   }
 

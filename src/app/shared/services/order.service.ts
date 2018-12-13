@@ -17,14 +17,13 @@ export class OrderService {
               private authService: AuthService
   ) { }
 
-
-  // getOrders() : Observable<any> {
-  //   const db = this.db.collection('/order');
-  //   return db.valueChanges();
-  // }
-
   getOrders(orderStatus: OrderStatus): Observable<any[]> {
     const db = this.db.collection('/order', ref => ref.where('status','==',orderStatus));
+    return db.valueChanges();
+  }
+
+  getOrdersByUserId(userId : string) : Observable<any[]> {
+    const db = this.db.collection('/order', ref => ref.where('userId','==',userId));
     return db.valueChanges();
   }
 

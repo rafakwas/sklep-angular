@@ -106,6 +106,10 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
+  isRegularUser() {
+    return this.isSignedIn && (this.isRole('CUSTOMER'));
+  }
+
   hasManagerPermissions() {
     return this.isSignedIn && (this.isRole('MANAGER') || this.isRole('ADMIN'));
   }
