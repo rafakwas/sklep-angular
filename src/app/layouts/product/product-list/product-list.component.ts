@@ -76,6 +76,12 @@ export class ProductListComponent implements OnInit {
 
   isProductAvailable(product : Product) {
     let cartProducts = this.cartService.getLocalCartProducts();
+    if (cartProducts.length === 0 && product.quantity > 0) {
+      return true;
+    }
+    if (cartProducts.length === 0 && product.quantity <= 0) {
+      return false;
+    }
     for (var i = 0; i < cartProducts.length; i++) {
       if (cartProducts[i].id == product.id) {
         if (product.quantity <= cartProducts[i].quantity) {

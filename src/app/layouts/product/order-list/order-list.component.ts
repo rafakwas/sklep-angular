@@ -32,17 +32,6 @@ export class OrderListComponent implements OnInit {
     this.orderService.realizeOrder(order);
   }
 
-  completeSingleOrderProduct(order: Order, orderProduct :OrderProduct) {
-    this.toastrService.success("Kompletuję przedmiot " + orderProduct.product.name, "Zamówienie nr " + order.id);
-    this.orderService.realizeProduct(order,orderProduct);
-  }
-
-  // canCompleteSingleOrderItem(product : Product) {
-  //   this.productService.getProduct(product.id).subscribe((databaseProduct) => {
-  //     return databaseProduct.quantity >= product.quantity;
-  //   });
-  // }
-
   filter(orderStatus : OrderStatus) {
     this.status = orderStatus;
     this.getOrders();
