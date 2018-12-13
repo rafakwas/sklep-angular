@@ -51,7 +51,7 @@
       {{item.sendDate}}
     </td>
     <td>
-      <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#completingOrderDatatable" data-placement="top" title="Kompletuj zamówienie">
+      <button class="btn btn-primary btn-block" [routerLink]="[ '/products/all-orders', item.id ]" title="Kompletuj zamówienie">
           Szczegóły zamówienia
       </button>
     </td>
@@ -62,57 +62,6 @@
     </td>
 
 
-    <div class="modal fade" id="completingOrderDatatable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog cascading-modal" role="document">
-          <div class="modal-content">
-            <div class="modal-header light-blue darken-3 white-text">
-              <h4 class="title">
-                <i class="fa fa-edit"></i> Kompletowanie zamówienia </h4>
-              <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table id="innerOrderItems" class="table table-striped" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                  <th class="th-sm">skompletowany
-                  </th>
-                  <th class="th-sm">nazwa
-                  </th>
-                  <th class="th-sm">ilość
-                  </th>
-                  <th class="th-sm">cena jednostkowa
-                  </th>
-                  <th class="th-sm">kompletuj przedmiot
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let orderProduct of item.products">
-                  <td>
-                    {{orderProduct.isChecked}}
-                  </td>
-                  <td>
-                    {{orderProduct.product.name}}
-                  </td>
-                  <td>
-                    {{orderProduct.product.quantity}}
-                  </td>
-                  <td>
-                    {{orderProduct.product.price}}
-                  </td>
-                  <button class="btn btn-success btn-block" [disabled]="false" [hidden]="orderProduct.isChecked"
-                          (click)="completeOrderSingleItem(item,orderProduct)">Skompletuj przedmiot
-                  </button>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-      </div>
-    </div>
 
 
   </tr>

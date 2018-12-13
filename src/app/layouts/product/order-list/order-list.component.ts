@@ -6,6 +6,7 @@ import {plainToClass, deserialize} from "class-transformer";
 import {OrderProduct} from "../../../shared/models/orderProduct";
 import {Observable} from "rxjs";
 import {ProductService} from "../../../shared/services/product.service";
+import {Product} from "../../../shared/models/product";
 
 @Component({
   selector: 'app-order-list',
@@ -31,9 +32,16 @@ export class OrderListComponent implements OnInit {
     this.orderService.realizeOrder(order);
   }
 
-  completeOrderSingleItem(order: Order, orderProduct :OrderProduct) {
+  completeSingleOrderProduct(order: Order, orderProduct :OrderProduct) {
     this.toastrService.success("Kompletuję przedmiot " + orderProduct.product.name, "Zamówienie nr " + order.id);
+    this.orderService.realizeProduct(order,orderProduct);
   }
+
+  // canCompleteSingleOrderItem(product : Product) {
+  //   this.productService.getProduct(product.id).subscribe((databaseProduct) => {
+  //     return databaseProduct.quantity >= product.quantity;
+  //   });
+  // }
 
   filter(orderStatus : OrderStatus) {
     this.status = orderStatus;

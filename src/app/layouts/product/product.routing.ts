@@ -7,6 +7,7 @@ import {CheckoutComponent} from "./checkout/checkout.component";
 import {OrderListComponent} from "./order-list/order-list.component";
 import {AdminGuard} from "../../shared/services/admin-gaurd";
 import {UserOrdersComponent} from "./user-orders/user-orders.component";
+import {OrderDetailsComponent} from "./order-details/order-details.component";
 
 export const ProductRoutes: Routes = [
 	{
@@ -40,6 +41,10 @@ export const ProductRoutes: Routes = [
       {
         path: 'user-orders',
         component: UserOrdersComponent
+      },
+      {
+        path: 'all-orders/:id',
+        component: OrderDetailsComponent
       }
     ]
 	}

@@ -15,6 +15,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {OrderListComponent} from "./order-list/order-list.component";
 import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule,ReactiveFormsModule],
@@ -28,9 +29,9 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
     UpperPriceBound,
     CheckoutComponent,
     OrderListComponent,
-    UserOrdersComponent
+    UserOrdersComponent,
+    OrderDetailsComponent
   ],
-
 })
 export class ProductModule { }
 
