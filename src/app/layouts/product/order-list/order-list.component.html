@@ -21,6 +21,10 @@
     </th>
     <th class="th-sm">data wysyłki
     </th>
+    <th class="th-sm">kompletuj
+    </th>
+    <th class="th-sm">zrealizuj całość
+    </th>
   </tr>
   </thead>
   <tbody>
@@ -47,8 +51,8 @@
       {{item.sendDate}}
     </td>
     <td>
-      <button class="btn btn-primary btn-block">
-        Szczegóły zamówienia
+      <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#completingOrderDatatable" data-placement="top" title="Kompletuj zamówienie">
+          Szczegóły zamówienia
       </button>
     </td>
     <td>
@@ -56,23 +60,73 @@
               (click)="completeOrder(item)">Dokończ zamówienie
       </button>
     </td>
+
+
+
+
+
+    <div class="modal fade" id="completingOrderDatatable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog cascading-modal" role="document">
+          <div class="modal-content">
+            <div class="modal-header light-blue darken-3 white-text">
+              <h4 class="title">
+                <i class="fa fa-edit"></i> Kompletowanie zamówienia </h4>
+              <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </tr>
   </tbody>
   <tfoot>
   <tr>
     <th class="th-sm">email
     </th>
-    <th class="th-sm">city
+    <th class="th-sm">miasto
     </th>
-    <th class="th-sm">address
+    <th class="th-sm">adres
     </th>
-    <th class="th-sm">phone
+    <th class="th-sm">telefon
     </th>
-    <th class="th-sm">price
+    <th class="th-sm">suma
     </th>
     <th class="th-sm">status
     </th>
-    <th class="th-sm">send date
+    <th class="th-sm">data wysyłki
+    </th>
+    <th class="th-sm">kompletuj
+    </th>
+    <th class="th-sm">zrealizuj całość
     </th>
   </tr>
   </tfoot>
