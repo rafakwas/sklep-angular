@@ -10,7 +10,7 @@ import {ToastrService} from "./toastr.service";
 })
 export class ProductService implements OnInit {
 
-  constructor(private db: AngularFirestore, private cartService : CartService, private toastrService : ToastrService) { }
+  constructor(public db: AngularFirestore, private cartService : CartService, private toastrService : ToastrService) { }
 
   ngOnInit() {
   }
@@ -31,12 +31,12 @@ export class ProductService implements OnInit {
   updateProduct(product : Product) {
     this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
       .then(function() {
-        this.toastrService.success("Produkt zaktualizowany!");
+        console.log('Produkt zaktualizowany');
       });
   }
 
-  getProduct(id: string): Observable<any> {
-    return this.db.collection('/product').doc(id).valueChanges();
+  getProduct(id: string): any {
+    return this.db.collection('/product').doc(id);
   }
 
   isProductAvailable(product : Product) {

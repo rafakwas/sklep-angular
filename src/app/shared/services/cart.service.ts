@@ -65,18 +65,13 @@ export class CartService {
     let cartProducts = this.getLocalCartProducts();
     let totalPrice = 0;
     cartProducts.forEach((product) => {
-      totalPrice += product.price*product.quantity;
+      var priceReduction = 0;
+      if (product.bargain != 0 && ((new Date().getTime()) < product.till)) {
+        priceReduction = product.price*(product.bargain/100);
+      }
+      totalPrice += (product.price-priceReduction)*product.quantity;
     });
     return totalPrice;
   }
-
-  getLocalCartProductsTotalValue() {
-    var totalValue = 0;
-    this.getLocalCartProducts().forEach((product) => {
-      totalValue += product.price*product.quantity;
-    });
-    return totalValue;
-  }
-
 
 }

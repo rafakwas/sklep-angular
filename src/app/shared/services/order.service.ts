@@ -6,6 +6,7 @@ import {ProductService} from "./product.service";
 import {Product} from "../models/product";
 import {OrderProduct} from "../models/orderProduct";
 import {AuthService} from "./auth.service";
+import {ToastrService} from "./toastr.service";
 
 @Injectable({
   providedIn: "root"
@@ -14,7 +15,8 @@ export class OrderService {
 
   constructor(private db: AngularFirestore,
               private productService: ProductService,
-              private authService: AuthService
+              private authService: AuthService,
+              private toastrService: ToastrService
   ) { }
 
   getOrders(orderStatus: OrderStatus): Observable<any[]> {
@@ -27,30 +29,35 @@ export class OrderService {
     return db.valueChanges();
   }
 
+  getOrder(id: string): Observable<any> {
+    return this.db.collection('/order').doc(id).valueChanges();
+  }
+
   updateOrder(order: Order) {
     this.db.collection('/order').doc(order.id).set(Object.assign({}, order))
       .then(function() {
-        console.log('Order successfully added:', order);
+        this.toastrService.info("Order successfully added",order.id);
       });
   }
 
-  realizeProduct(orderProduct: OrderProduct) {
-    const orderedQuantity = orderProduct.product.quantity;
-    console.log("Ordered quantity: " + orderedQuantity);
-    console.log("Id sprawdzanego produktu: " + orderProduct.product.id);
-    this.productService.getProduct(orderProduct.product.id).subscribe(p => {
-      console.log("W magazynie jest: " + p.quantity);
-      if (p.quantity < orderedQuantity) {
-        console.log("Brakło w magazynie");
-        return orderProduct;
-      } else {
-        p.quantity -= orderedQuantity;
-        this.productService.updateProduct(p);
-      }
-    });
-    orderProduct.isChecked = true;
-    return orderProduct;
-  }
+  // realizeProduct(orderProduct: OrderProduct) : OrderProduct {
+  //   const orderedQuantity = orderProduct.product.quantity;
+  //   console.log("Zamówiona ilość: " + orderedQuantity);
+  //   this.productService.getProduct(orderProduct.product.id).subscribe(databaseProduct => {
+  //     this.toastrService.success("znaleziono produkt " + databaseProduct.id,databaseProduct.quantity + " vs " + orderedQuantity);
+  //     if (databaseProduct.quantity < orderProduct.product.quantity) {
+  //       this.toastrService.error("Za malo produktów w magazynie!","");
+  //       return orderProduct;
+  //     } else {
+  //       // databaseProduct.quantity -= orderedQuantity;
+  //       // this.productService.updateProduct(databaseProduct);
+  //       orderProduct.isChecked = true;
+  //       return orderProduct;
+  //     }
+  //   });
+  //   throw Error();
+  //
+  // }
 
   realizeOrder(order: Order) {
     console.log("Produkty w obrębie zamówienia zrealizowane");
@@ -66,7 +73,7 @@ export class OrderService {
   }
 
   makeOrder(result: any, basket: Product[], totalSum: number) {
-    const orderProduct = basket.map(basketItem => Object.assign({}, new OrderProduct(false, basketItem)));
+    const orderProduct = basket.map(basketItem => Object.assign({}, new OrderProduct(this.db.createId(),false, basketItem)));
     var userId = null;
     if (this.authService.isSignedIn()) {
       userId = this.authService.data.id;

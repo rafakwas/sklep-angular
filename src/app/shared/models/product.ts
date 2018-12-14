@@ -7,4 +7,6 @@ export class  Product {
   imageUrl: string;
   productAdded: number;
   quantity: number;
+  bargain? : number;
+  till? : number;
 }

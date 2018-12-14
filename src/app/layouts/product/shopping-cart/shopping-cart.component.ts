@@ -31,6 +31,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   recalculate() {
-    this.totalValue = this.cartService.getLocalCartProductsTotalValue()
+    this.totalValue = this.cartService.calculateCartProductsPrice()
   }
 }

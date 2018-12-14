@@ -34,7 +34,7 @@
   </div>
   <div class="row">
     <div class="col-sm-4 mb-2"
-         *ngFor="let product of productList | async | filterByCategory: filterByCategory | filterByName: filterByName | lowerPriceBound: lowerPriceBound | upperPriceBound: upperPriceBound | paginate: { itemsPerPage: 2, currentPage: page }"
+         *ngFor="let product of productList | async | filterByCategory: filterByCategory | filterByName: filterByName | lowerPriceBound: lowerPriceBound | upperPriceBound: upperPriceBound | paginate: { itemsPerPage: 10, currentPage: page }"
     >
       <div class="item">
         <div class=" mb-r">
@@ -62,6 +62,8 @@
                 <div class="card-footer">
                   <span class="float-left">{{ product.price }} PLN</span>
                   <span class="float-right">
+                    <a class="active" data-toggle="modal" data-target="#definePromotion" data-placement="top" title="Promocje"
+                       *ngIf="getAuthService().hasAdminPermissions()"><i class="fa fa-gift" aria-hidden="true"></i></a>
                     <a class="active" data-toggle="modal" data-target="#editProduct" data-placement="top" title="Edytuj"
                        *ngIf="getAuthService().hasAdminPermissions()"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka"
@@ -152,6 +154,105 @@
             </form>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--POCZĄTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEK-->
+
+
+
+
+        <div class="modal fade" id="definePromotion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog cascading-modal" role="document">
+            <form [formGroup]="promotionForm" (ngSubmit)="promotion(product)">
+              <div class="modal-content">
+                <div class="modal-header light-blue darken-3 white-text">
+                  <h4 class="title">
+                    <i class="fa fa-edit"></i> Zarządzanie promocjami ({{product.name}}) </h4>
+                  <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="bargain">Obniżka procentowa</label>
+                      <input type="number" class="form-control" id="bargain" name="bargain" formControlName="bargain"
+                             placeholder={{product.bargain}}
+                             value="" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="promotionTime"></label>
+                      <input type="number" class="form-control" id="promotionTime" name="promotionTime"
+                             formControlName="promotionTime"
+                             value="" required>
+                    </div>
+                  </div>
+
+                  <div class="text-center mt-2">
+                    <button class="btn btn-info btn-success" id="promotionAcceptButton" mdbRippleRadius
+                            [disabled]="!promotionForm.valid">Zatwierdź promocję<i class="fa fa-sign-in ml-1"></i>
+                    </button>
+                  </div>
+
+                  <div class="text-center mt-2">
+                    <button class="btn btn-info waves-light" id="promotionDismissButton" mdbRippleRadius
+                            [disabled]="!product.bargain" (click)="deletePromotion(product)">Usuń promocję<i class="fa fa-sign-in ml-1"></i>
+                    </button>
+                  </div>
+
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!--KOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONIEC-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
     </div>
   </div>
