@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { IndexModule } from './index/index.module';
 import { ProductModule } from './layouts/product/product.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { RouterModule } from '@angular/router';
 import {SharedModule} from "./shared/shared.module";
@@ -19,7 +20,8 @@ import { AppRoutes } from './app.routing';
     ProductModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes),
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]

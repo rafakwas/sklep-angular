@@ -30,6 +30,10 @@ export class ProductListComponent implements OnInit {
   editForm: FormGroup;
   promotionForm: FormGroup;
 
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+
   constructor(private productService: ProductService,
               private cartService: CartService,
               private toastrService: ToastrService,
@@ -43,6 +47,27 @@ export class ProductListComponent implements OnInit {
     this.productList = this.productService.getProducts();
     this.editForm = this.createEditProductFormGroup();
     this.promotionForm = this.createDefinePromotionFormGroup();
+
+    this.dropdownList = [
+      { item_id: 1, item_text: 'samochody' },
+      { item_id: 2, item_text: 'żywność' },
+      { item_id: 3, item_text: 'narzędzia' },
+      { item_id: 4, item_text: 'rtv' },
+      { item_id: 5, item_text: 'agh' }
+    ];
+    this.selectedItems = [
+      { item_id: 3, item_text: 'samochody' },
+      { item_id: 4, item_text: 'żywność' }
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Zaznacz wszystkie',
+      unSelectAllText: 'Odznacz wszystkie',
+      itemsShowLimit: 10,
+      allowSearchFilter: true
+    };
   }
 
   createEditProductFormGroup() {
@@ -121,4 +146,10 @@ export class ProductListComponent implements OnInit {
     return this.authService;
   }
 
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
 }

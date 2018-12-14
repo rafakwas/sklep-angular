@@ -16,9 +16,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {OrderListComponent} from "./order-list/order-list.component";
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule,ReactiveFormsModule],
+  imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule,ReactiveFormsModule, NgMultiSelectDropDownModule.forRoot()
+  ],
   declarations: [
     ProductListComponent,
     AddProductComponent,
