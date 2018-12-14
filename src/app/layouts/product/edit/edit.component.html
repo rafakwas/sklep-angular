@@ -1,0 +1,78 @@
+<div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <form [formGroup]="editForm" (ngSubmit)="edit()">
+      <div class="modal-content">
+        <div class="modal-header light-blue darken-3 white-text">
+          <h4 class="title">
+            <i class="fa fa-edit"></i> Edycja produktu </h4>
+          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">Nazwa produktu</label>
+              <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                     placeholder={{product.name}}
+                     value="" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="category">Kategoria</label>
+              <input type="text" class="form-control" id="category" name="category"
+                     formControlName="category"
+                     placeholder={{product.category}} value="" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description">Opis
+              <span class="text-muted">(opcjonalny)</span>
+            </label>
+            <textarea type="text" class="form-control" id="description" placeholder={{product.description}}
+                      name="description"
+                      formControlName="description"></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="price">Cena</label>
+              <input type="number" name="price" class="form-control" formControlName="price"
+                     placeholder={{product.price}}
+                     id="price" value="" required>
+              <div class="invalid-feedback">
+                Cena jest wymagana
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="quantity">Ilość</label>
+              <input type="number" class="form-control" id="quantity" name="quantity"
+                     formControlName="quantity" placeholder={{product.quantity}}
+                     value="" required>
+              <div class="invalid-feedback">
+                Ilość jest wymagana
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="imageUrl">Zdjęcie</label>
+            <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl"
+                   name="imageUrl"
+                   placeholder={{product.imageUrl}} required>
+          </div>
+
+
+          <div class="text-center mt-2">
+            <button class="btn btn-info waves-light" id="editButton" mdbRippleRadius
+                    [disabled]="!editForm.valid">Zatwierdź<i class="fa fa-sign-in ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
