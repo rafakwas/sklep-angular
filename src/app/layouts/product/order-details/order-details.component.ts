@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from "../../../shared/services/toastr.service";
 import {OrderProduct} from "../../../shared/models/orderProduct";
-import {Order} from "../../../shared/models/order";
+import {Order, OrderStatus} from "../../../shared/models/order";
 import {OrderService} from "../../../shared/services/order.service";
 import {Observable} from "rxjs";
 import {ProductService} from "../../../shared/services/product.service";
@@ -43,40 +43,20 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   completeSingleOrderProduct(orderProduct: OrderProduct) {
-    var databaseProduct = this.productService.getProduct(orderProduct.product.id).pipe(first()).toPromise();
-    const orderedQuantity = orderProduct.product.quantity;
-    console.log("Zamówiona ilość: " + orderedQuantity);
-    this.toastrService.success("znaleziono produkt " + databaseProduct.id, databaseProduct.quantity + " vs " + orderedQuantity);
-    if (databaseProduct.quantity < orderProduct.product.quantity) {
-      this.toastrService.error("Za malo produktów w magazynie!", "");
-      return;
+    this.order.products.filter(x => x.id === orderProduct.id).forEach(x => {
+      x.isChecked = true;
+      this.productService.decrementProductAmount(x.product.id,x.product.quantity);
+    });
+    let unchecked = this.order.products.filter(x => !x.isChecked).length;
+    console.log("unchecked : " + unchecked);
+    if (unchecked == 0) {
+      this.toastrService.success("Zamówienie skompletowane w całości!","");
+      this.order.status = OrderStatus.COMPLETED;
     } else {
-      this.toastrService.success("Kompletowanie!", "");
-      databaseProduct.quantity -= orderedQuantity;
-      this.productService.updateProduct(databaseProduct);
-      this.orderProducts.filter(x => x.id === orderProduct.id).forEach(x => x.isChecked = true);
-      this.order.products = this.orderProducts;
-      this.orderService.updateOrder(this.order);
-      return;
+      this.toastrService.success("Zamówienie skompletowane po części!","");
+      this.order.status = OrderStatus.IN_PROGRESS;
     }
+    this.orderService.updateOrder(this.order);
   };
-
-  // var docRef = this.productService.db.collection("order").doc(orderProduct.product.id);
-  // docRef.get().then(function(doc) {
-  //   if (doc.exists) {
-  //     console.log("Document data:", doc.data());
-  //   } else {
-  //     doc.data() will be undefined in this case
-  // console.log("No such document!");
-  // }
-  // }).catch(function(error) {
-  //   console.log("Error getting document:", error);
-  // });
-  //
-
-  //
-  //
-
-  // });
 
 }

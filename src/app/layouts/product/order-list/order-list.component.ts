@@ -37,19 +37,6 @@ export class OrderListComponent implements OnInit {
     this.getOrders();
   }
 
-  canSubmitAll(order : Order) {
-    // order.products.forEach((orderProduct) => {
-    //   let orderQuantity = orderProduct.product.quantity;
-    //   let actualProduct = this.productService.getProduct(orderProduct.product.id);
-    //   let actualQuantity = actualProduct.quantity;
-    //   this.toastrService.info("jestem tu","hehe");
-    //   if (actualQuantity > orderQuantity) {
-    //     return false;
-    //   }
-    // });
-    // return true;
-  }
-
   getCompletedOrderStatus() {
     return OrderStatus.COMPLETED;
   }

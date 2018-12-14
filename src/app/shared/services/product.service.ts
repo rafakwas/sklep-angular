@@ -35,6 +35,14 @@ export class ProductService implements OnInit {
       });
   }
 
+  decrementProductAmount(id : string, value : number) {
+    this.db.collection('/product').doc(id).ref.get().then(p => {
+        var product = p.data() as Product;
+        product.quantity -= value;
+        this.updateProduct(product);
+      })
+  }
+
   getProduct(id: string): any {
     return this.db.collection('/product').doc(id);
   }

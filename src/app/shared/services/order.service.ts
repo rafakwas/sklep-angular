@@ -36,39 +36,16 @@ export class OrderService {
   updateOrder(order: Order) {
     this.db.collection('/order').doc(order.id).set(Object.assign({}, order))
       .then(function() {
-        this.toastrService.info("Order successfully added",order.id);
+        console.log("Pomyślnie zaktualizowano zamówienie " + order.id);
       });
   }
 
-  // realizeProduct(orderProduct: OrderProduct) : OrderProduct {
-  //   const orderedQuantity = orderProduct.product.quantity;
-  //   console.log("Zamówiona ilość: " + orderedQuantity);
-  //   this.productService.getProduct(orderProduct.product.id).subscribe(databaseProduct => {
-  //     this.toastrService.success("znaleziono produkt " + databaseProduct.id,databaseProduct.quantity + " vs " + orderedQuantity);
-  //     if (databaseProduct.quantity < orderProduct.product.quantity) {
-  //       this.toastrService.error("Za malo produktów w magazynie!","");
-  //       return orderProduct;
-  //     } else {
-  //       // databaseProduct.quantity -= orderedQuantity;
-  //       // this.productService.updateProduct(databaseProduct);
-  //       orderProduct.isChecked = true;
-  //       return orderProduct;
-  //     }
-  //   });
-  //   throw Error();
-  //
-  // }
-
   realizeOrder(order: Order) {
-    console.log("Produkty w obrębie zamówienia zrealizowane");
-    if (order.products.filter(x => !x.isChecked).length > 0) {
-      console.log("Znalazły się produkty, których nie ma na stanie");
-      order.status = OrderStatus.IN_PROGRESS;
-    } else {
-      console.log("Możemy skompletować zamówienie - wszystkie produkty spakowane");
-      order.status = OrderStatus.COMPLETED;
-      order.sendDate = new Date();
-    }
+    order.products.forEach((orderProduct) => {
+      orderProduct.isChecked = true;
+      this.productService.decrementProductAmount(orderProduct.product.id,orderProduct.product.quantity);
+    });
+    order.status = OrderStatus.COMPLETED;
     this.updateOrder(order);
   }
 
