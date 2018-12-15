@@ -1,0 +1,31 @@
+<td>
+  {{order.email}}
+</td>
+<td>
+  {{order.city}}
+</td>
+<td>
+  {{order.address}}
+</td>
+<td>
+  {{order.phone}}
+</td>
+<td>
+  {{order.totalPrice}}
+</td>
+<td>
+  {{order.status}}
+</td>
+<td>
+  {{order.sendDate}}
+</td>
+<td>
+  <button class="btn btn-primary btn-block"
+          (click)="openOrderCompletingModal()">Kompletuj zamówienie
+  </button>
+</td>
+<td>
+  <button class="btn btn-success btn-block" [disabled]="false" [hidden]="order.status === getCompletedOrderStatus()"
+          (click)="completeOrder()">Dokończ zamówienie
+  </button>
+</td>

@@ -16,26 +16,17 @@ import {first} from "rxjs/internal/operators";
 })
 export class OrderDetailsComponent implements OnInit {
 
-  id: string;
-  orderObservable: Observable<Order>;
-  order: Order;
-  orderProducts: OrderProduct[];
-
-  constructor(private _Activatedroute: ActivatedRoute,
-              private toastrService: ToastrService,
+  order = new Order();
+  orderProducts = [];
+  constructor(private toastrService: ToastrService,
               private orderService: OrderService,
               private productService: ProductService,
               private _router: Router) {
   }
 
-  ngOnInit() {
-    this.id = this._Activatedroute.snapshot.params['id'];
-    this.orderObservable = this.orderService.getOrder(this.id);
-    this.orderObservable.subscribe(x => {
-      this.toastrService.success("Pobrano zamówienie o id: " + x.firstname,"");
-      this.order = x;
-      this.orderProducts = x.products;
-    })
+  ngOnInit(
+  ) {
+    this.orderProducts = this.order.products;
   }
 
   onBack(): void {
@@ -58,5 +49,4 @@ export class OrderDetailsComponent implements OnInit {
     }
     this.orderService.updateOrder(this.order);
   };
-
 }

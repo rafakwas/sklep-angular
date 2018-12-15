@@ -21,16 +21,16 @@ export class Order {
   sendDate: Date;
   products: OrderProduct[];
 
-  constructor(userId: string,
-              firstname: string,
-              lastname: string,
-              email: string,
-              address: string,
-              postalCode: string,
-              city: string,
-              phone: string,
-              totalPrice: number,
-              products: OrderProduct[]
+  constructor(userId?: string,
+              firstname?: string,
+              lastname?: string,
+              email?: string,
+              address?: string,
+              postalCode?: string,
+              city?: string,
+              phone?: string,
+              totalPrice?: number,
+              products?: OrderProduct[]
   ) {
     this.userId = userId;
     this.firstname = firstname;

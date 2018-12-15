@@ -1,35 +1,53 @@
-<table id="innerOrderItems" class="table table-striped" cellspacing="0" width="100%">
-  <thead>
-  <tr>
-    <th class="th-sm">skompletowany
-    </th>
-    <th class="th-sm">nazwa
-    </th>
-    <th class="th-sm">ilość
-    </th>
-    <th class="th-sm">cena jednostkowa
-    </th>
-    <th class="th-sm">kompletuj przedmiot
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let orderProduct of orderProducts">
-    <td>
-      {{orderProduct.isChecked}}
-    </td>
-    <td>
-      {{orderProduct.product.name}}
-    </td>
-    <td>
-      {{orderProduct.product.quantity}}
-    </td>
-    <td>
-      {{orderProduct.product.price}}
-    </td>
-    <button class="btn btn-success btn-block" [hidden]="orderProduct.isChecked"
-            (click)="completeSingleOrderProduct(orderProduct)">Skompletuj przedmiot
-    </button>
-  </tr>
-  </tbody>
-</table>
+<div class="modal-dialog cascading-modal">
+  <div class="modal-content">
+    <div class="modal-header light-blue darken-3 white-text">
+      <h4 class="modal-title" id="modal-basic-title">Kompletowanie zamówienia</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="container">
+
+        <table id="innerOrderItems" class="table table-striped" cellspacing="0" width="100%">
+          <thead>
+          <tr>
+            <th class="th-sm">skompletowany
+            </th>
+            <th class="th-sm">nazwa
+            </th>
+            <th class="th-sm">ilość
+            </th>
+            <th class="th-sm">cena jednostkowa
+            </th>
+            <th class="th-sm">kompletuj przedmiot
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let orderProduct of orderProducts">
+            <td>
+              {{orderProduct.isChecked}}
+            </td>
+            <td>
+              {{orderProduct.product.name}}
+            </td>
+            <td>
+              {{orderProduct.product.quantity}}
+            </td>
+            <td>
+              {{orderProduct.product.price}}
+            </td>
+            <button class="btn btn-success btn-block" [hidden]="orderProduct.isChecked"
+                    (click)="completeSingleOrderProduct(orderProduct)">Skompletuj przedmiot
+            </button>
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>

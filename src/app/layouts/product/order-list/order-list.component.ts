@@ -7,6 +7,9 @@ import {OrderProduct} from "../../../shared/models/orderProduct";
 import {Observable} from "rxjs";
 import {ProductService} from "../../../shared/services/product.service";
 import {Product} from "../../../shared/models/product";
+import {PromotionComponent} from "../promotion/promotion.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {OrderDetailsComponent} from "../order-details/order-details.component";
 
 @Component({
   selector: 'app-order-list',
@@ -28,16 +31,8 @@ export class OrderListComponent implements OnInit {
     this.orderList = this.orderService.getOrders(this.status);
   }
 
-  completeOrder(order : Order) {
-    this.orderService.realizeOrder(order);
-  }
-
   filter(orderStatus : OrderStatus) {
     this.status = orderStatus;
     this.getOrders();
-  }
-
-  getCompletedOrderStatus() {
-    return OrderStatus.COMPLETED;
   }
 }

@@ -5,87 +5,9 @@
 </div>
 
 <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
-  <thead>
-  <tr>
-    <th class="th-sm">email
-    </th>
-    <th class="th-sm">miasto
-    </th>
-    <th class="th-sm">adres
-    </th>
-    <th class="th-sm">telefon
-    </th>
-    <th class="th-sm">suma
-    </th>
-    <th class="th-sm">status
-    </th>
-    <th class="th-sm">data wysyłki
-    </th>
-    <th class="th-sm">kompletuj
-    </th>
-    <th class="th-sm">zrealizuj całość
-    </th>
-  </tr>
-  </thead>
   <tbody>
-  <tr *ngFor="let item of orderList | async">
-    <td>
-      {{item.email}}
-    </td>
-    <td>
-      {{item.city}}
-    </td>
-    <td>
-      {{item.address}}
-    </td>
-    <td>
-      {{item.phone}}
-    </td>
-    <td>
-      {{item.totalPrice}}
-    </td>
-    <td>
-      {{item.status}}
-    </td>
-    <td>
-      {{item.sendDate}}
-    </td>
-    <td>
-      <button class="btn btn-primary btn-block" [routerLink]="[ '/products/all-orders', item.id ]" title="Kompletuj zamówienie">
-          Szczegóły zamówienia
-      </button>
-    </td>
-    <td>
-      <button class="btn btn-success btn-block" [disabled]="false" [hidden]="item.status === getCompletedOrderStatus()"
-              (click)="completeOrder(item)">Dokończ zamówienie
-      </button>
-    </td>
-
-
-
-
+  <tr *ngFor="let order of orderList | async">
+    <app-order [order]="order"></app-order>
   </tr>
   </tbody>
-  <tfoot>
-  <tr>
-    <th class="th-sm">email
-    </th>
-    <th class="th-sm">miasto
-    </th>
-    <th class="th-sm">adres
-    </th>
-    <th class="th-sm">telefon
-    </th>
-    <th class="th-sm">suma
-    </th>
-    <th class="th-sm">status
-    </th>
-    <th class="th-sm">data wysyłki
-    </th>
-    <th class="th-sm">kompletuj
-    </th>
-    <th class="th-sm">zrealizuj całość
-    </th>
-  </tr>
-  </tfoot>
 </table>

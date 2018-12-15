@@ -21,6 +21,7 @@ import {PromotionComponent} from './promotion/promotion.component';
 import {ProductComponent} from './product/product.component';
 import {EditComponent} from './edit/edit.component';
 import {NgbActiveModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -44,7 +45,8 @@ import {NgbActiveModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
     OrderDetailsComponent,
     PromotionComponent,
     ProductComponent,
-    EditComponent
+    EditComponent,
+    OrderComponent
   ],
   providers: [NgbActiveModal],
   entryComponents: [
