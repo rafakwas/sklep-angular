@@ -46,17 +46,4 @@ export class ProductService implements OnInit {
   getProduct(id: string): any {
     return this.db.collection('/product').doc(id);
   }
-
-  isProductAvailable(product : Product) {
-    let cartProducts = this.cartService.getLocalCartProducts();
-    for (var i = 0; i < cartProducts.length; i++) {
-      if (cartProducts[i].id == product.id) {
-        if (product.quantity <= cartProducts[i].quantity) {
-          console.log("database product " + product.quantity + ". cart product " + cartProducts[i].quantity);
-          return false;
-        }
-      }
-    }
-    return true;
-  }
 }

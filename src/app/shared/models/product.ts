@@ -9,4 +9,13 @@ export class  Product {
   quantity: number;
   bargain? : number;
   till? : number;
+  constructor(id?: string, name?: string, imageUrl?: string, price?: number, category?: string, description?: string, quantity?: number) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.category = category;
+    this.description = description;
+    this.imageUrl = imageUrl;
+    this.quantity = quantity;
+  }
 }

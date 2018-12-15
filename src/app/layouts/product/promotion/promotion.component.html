@@ -1,47 +1,50 @@
-<div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Promocja produktu {{product.name}}</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
+<div class="modal-dialog cascading-modal">
+  <div class="modal-content">
+    <div class="modal-header light-blue darken-3 white-text">
+      <h4 class="modal-title" id="modal-basic-title">Promocja produktu {{product.name}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
 
-  <div class="container">
-    <form [formGroup]="promotionForm" class="form-horizontal" role="form">
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="bargain">Promocja</label>
-          <input type="number" class="form-control" id="bargain" name="bargain" formControlName="bargain"
-                 placeholder={{product.bargain}}
-                 value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="promotionTime">Czas trwania (minuty)</label>
-          <input type="number" class="form-control" id="promotionTime" name="promotionTime"
-                 formControlName="promotionTime"
-                 value="" required>
-        </div>
-      </div>
-      <!--dsdasdas-->
-      <div class="row">
-        <div class="text-center mt-2">
-          <button class="btn btn-info btn-success" id="promotionAcceptButton" mdbRippleRadius
-                  [disabled]="!promotionForm.valid" (click)="addPromotion()">Zatwierdź promocję<i class="fa fa-sign-in ml-1"></i>
-          </button>
-        </div>
+      <div class="container">
+        <form [formGroup]="promotionForm" class="form-horizontal" role="form">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="bargain">Promocja</label>
+              <input type="number" class="form-control" id="bargain" name="bargain" formControlName="bargain"
+                     placeholder={{product.bargain}}
+                     value="" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="promotionTime">Czas trwania (minuty)</label>
+              <input type="number" class="form-control" id="promotionTime" name="promotionTime"
+                     formControlName="promotionTime"
+                     value="" required>
+            </div>
+          </div>
+          <!--dsdasdas-->
+          <div class="row">
+            <div class="text-center mt-2">
+              <button class="btn btn-info btn-success" id="promotionAcceptButton" mdbRippleRadius
+                      [disabled]="!promotionForm.valid" (click)="addPromotion()">Zatwierdź promocję<i
+                class="fa fa-sign-in ml-1"></i>
+              </button>
+            </div>
 
-        <div class="text-center mt-2">
-          <button class="btn btn-info waves-light" id="promotionDismissButton" mdbRippleRadius
-                  [disabled]="!product.bargain" (click)="deletePromotion()">Usuń promocję<i
-            class="fa fa-sign-in ml-1"></i>
-          </button>
-        </div>
+            <div class="text-center mt-2">
+              <button class="btn btn-info waves-light" id="promotionDismissButton" mdbRippleRadius
+                      [disabled]="!product.bargain" (click)="deletePromotion()">Usuń promocję<i
+                class="fa fa-sign-in ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>
-
-
 
 
 
