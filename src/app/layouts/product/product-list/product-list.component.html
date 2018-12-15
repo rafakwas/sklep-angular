@@ -46,7 +46,7 @@
   </div>
   <div class="row">
     <div class="col-sm-4 mb-2"
-         *ngFor="let product of productList | async | filterByCategory: selectedItems | filterByName: filterByName | lowerPriceBound: lowerPriceBound | upperPriceBound: upperPriceBound | paginate: { itemsPerPage: 10, currentPage: page }"
+         *ngFor="let product of productList | async "
     >
       <app-product [product]="product"></app-product>
     </div>

@@ -7,7 +7,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FormsModule, FormBuilder } from "@angular/forms";
 import { RouterModule, Router } from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
 import { AgmCoreModule } from "@agm/core";
 import { NoProductsFoundComponent } from "./components/no-products-found/no-products-found.component";
 import { NoAccessComponent } from "./components/no-access/no-access.component";
@@ -34,7 +33,6 @@ import {AdminGuard} from "./services/admin-gaurd";
     AngularFirestoreModule,
     AngularFireAuthModule,
 		FormsModule,
-		HttpClientModule,
 		RouterModule,
     NgxPaginationModule
   ],

@@ -30,9 +30,9 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this._Activatedroute.snapshot.params['id'];
-    this.toastrService.success("Retrieved " + this.id, "");
     this.orderObservable = this.orderService.getOrder(this.id);
     this.orderObservable.subscribe(x => {
+      this.toastrService.success("Pobrano zamówienie o id: " + x.firstname,"");
       this.order = x;
       this.orderProducts = x.products;
     })

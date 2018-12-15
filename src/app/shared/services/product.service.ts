@@ -4,35 +4,46 @@ import {Observable} from 'rxjs';
 import {Product} from "../models/product";
 import {CartService} from "./cart.service";
 import {ToastrService} from "./toastr.service";
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import * as _ from 'lodash';
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProductService implements OnInit {
 
-  constructor(public db: AngularFirestore, private cartService : CartService, private toastrService : ToastrService) { }
+  constructor(public db: AngularFirestore, private cartService : CartService, private toastrService : ToastrService,
+              private http: HttpClient) { }
 
   ngOnInit() {
   }
 
-  getProducts(): Observable<any[]> {
-    const db = this.db.collection('/product');
-    return db.valueChanges();
+  getProducts(): Observable<Product[]> {
+    return this.http
+      .get<Product[]>("http://localhost:3000/products")
+      .pipe(map(data => _.values(data)));
   }
 
   createProduct(product: Product) {
-    product.id = this.db.createId();
-    this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
-      .then(function() {
-        console.log('Product successfully added:', product);
-      });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    this.http.post<Product>('http://localhost:3000/products', product, httpOptions)
+      .subscribe(p => this.toastrService.success("Produkt dodany!",""));
   }
 
   updateProduct(product : Product) {
-    this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
-      .then(function() {
-        console.log('Produkt zaktualizowany');
-      });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    this.http.put<Product>('http://localhost:3000/products/'+product.id, product, httpOptions)
+      .subscribe(p => this.toastrService.success("Produkt zaktualizowany!",""));
   }
 
   decrementProductAmount(id : string, value : number) {
@@ -43,7 +54,4 @@ export class ProductService implements OnInit {
       })
   }
 
-  getProduct(id: string): any {
-    return this.db.collection('/product').doc(id);
-  }
 }
