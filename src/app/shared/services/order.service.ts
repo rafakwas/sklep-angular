@@ -24,50 +24,29 @@ export class OrderService {
               private http: HttpClient
   ) { }
 
-  getOrders(orderStatus: OrderStatus): Observable<Order[]> {
-    return this.http
-      .get<Order[]>("http://localhost:3000/orders/status/"+orderStatus)
-      .pipe(map(data => _.values(data)));
+  getOrders(orderStatus: OrderStatus): Observable<any[]> {
+    const db = this.db.collection('/order', ref => ref.where('status','==',orderStatus));
+    return db.valueChanges();
   }
 
-  getOrdersByUserId(userId : string) : Observable<Order[]> {
-    return this.http
-      .get<Order[]>("http://localhost:3000/orders/user/"+userId)
-      .pipe(map(data => _.values(data)));
+  getOrdersByUserId(userId : string) : Observable<any[]> {
+    const db = this.db.collection('/order', ref => ref.where('userId','==',userId));
+    return db.valueChanges();
   }
 
-  getOrder(id: string): Observable<Order> {
-    return this.http
-      .get<Order>("http://localhost:3000/orders/"+id)
-      .pipe(map(data => _.values(data)));
-  }
-
-  createOrder(order: Order) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    this.http.post<Product>('http://localhost:3000/orders', order, httpOptions)
-      .subscribe(p => this.toastrService.success("Zamówienie złożone!",""));
+  getOrder(id: string): Observable<any> {
+    return this.db.collection('/order').doc(id).valueChanges();
   }
 
   updateOrder(order: Order) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    this.http.put<Product>('http://localhost:3000/orders/'+order.id, order, httpOptions)
-      .subscribe(p => this.toastrService.success("Zamówienie zaktualizowane!",""));
+    this.db.collection('/order').doc(order.id).set(Object.assign({}, order))
+      .then(function() {
+        console.log("Pomyślnie zaktualizowano zamówienie " + order.id);
+      });
   }
 
   realizeOrder(order: Order) {
     order.products.forEach((orderProduct) => {
-      this.toastrService.info("order product id " , orderProduct.id);
-      if (orderProduct.isChecked === false) {
-        this.toastrService.success("Mamy checked na false","");
-      }
       orderProduct.isChecked = true;
       this.productService.decrementProductAmount(orderProduct.product.id,orderProduct.product.quantity);
     });
@@ -94,6 +73,6 @@ export class OrderService {
       totalSum,
       orderProduct);
     order.id = this.db.createId();
-    this.createOrder(order);
+    this.updateOrder(order);
   }
 }

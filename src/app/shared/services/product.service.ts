@@ -22,38 +22,35 @@ export class ProductService implements OnInit {
   ngOnInit() {
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.http
-      .get<Product[]>("http://localhost:3000/products")
-      .pipe(map(data => _.values(data)));
+  getProducts(): Observable<any[]> {
+    const db = this.db.collection('/product');
+    return db.valueChanges();
   }
 
   createProduct(product: Product) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    this.http.post<Product>('http://localhost:3000/products', product, httpOptions)
-      .subscribe(p => this.toastrService.success("Produkt dodany!", ""));
-  }
-
-  updateProduct(product: Product) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    this.http.put<Product>('http://localhost:3000/products/' + product.id, product, httpOptions)
-      .subscribe(p => this.toastrService.success("Produkt zaktualizowany!", ""));
-  }
-
-  decrementProductAmount(id: string, value: number) {
-    this.getProducts().subscribe(p => {
-      p.filter(x => x.id === id).forEach(product => {
-        product.quantity -= value;
-        this.updateProduct(product);
+    product.id = this.db.createId();
+    this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
+      .then(function() {
+        console.log('Product successfully added:', product);
       });
+  }
+
+  updateProduct(product : Product) {
+    this.db.collection('/product').doc(product.id).set(Object.assign({}, product))
+      .then(function() {
+        console.log('Produkt zaktualizowany');
+      });
+  }
+
+  decrementProductAmount(id : string, value : number) {
+    this.db.collection('/product').doc(id).ref.get().then(p => {
+      var product = p.data() as Product;
+      product.quantity -= value;
+      this.updateProduct(product);
     })
+  }
+
+  getProduct(id: string): any {
+    return this.db.collection('/product').doc(id);
   }
 }
