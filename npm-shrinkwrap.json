@@ -8794,6 +8794,19 @@
       "resolved": "https://registry.npmjs.org/ngx-pagination/-/ngx-pagination-3.2.1.tgz",
       "integrity": "sha512-+dprQkYoiNYDZkNAe/1HX0wDFbwCTE31mC2bEQVdI7ZbjEIvGB7R3zp5QoCKgz6cPFatUj4Iw6Ukqp5zx0oT/Q=="
     },
+    "ngx-socket-io": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/ngx-socket-io/-/ngx-socket-io-2.1.1.tgz",
+      "integrity": "sha512-VYg64N7v6V1zoZIfiqJqEE+y8R7OWUGZUDzbDxqk0wTWZyqyQaWAvyFzThnBjFkxkyj6cFaIDHH+N4k82rst5g==",
+      "requires": {
+        "core-js": "^2.4.1",
+        "reflect-metadata": "^0.1.10",
+        "rxjs": "^6.1.0",
+        "socket.io": "^2.0.1",
+        "socket.io-client": "^2.0.1",
+        "zone.js": "^0.8.11"
+      }
+    },
     "nice-try": {
       "version": "1.0.5",
       "resolved": "https://registry.npmjs.org/nice-try/-/nice-try-1.0.5.tgz",

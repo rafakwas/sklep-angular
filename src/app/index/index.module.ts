@@ -11,12 +11,13 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {LoginComponent} from "./login/login.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   imports: [ CommonModule, ProductModule,RouterModule.forChild(IndexRoutes), ReactiveFormsModule ],
-  declarations: [ IndexComponent, NavbarComponent, FooterComponent, LoginComponent ],
+  declarations: [ IndexComponent, NavbarComponent, FooterComponent, LoginComponent, MessageComponent ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  exports: [ NavbarComponent, FooterComponent ],
+  exports: [ NavbarComponent, FooterComponent, MessageComponent ],
   providers: []
 })
 export class IndexModule { }

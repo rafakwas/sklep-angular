@@ -23,6 +23,7 @@ import {OrderService} from "./services/order.service";
 import {CartService} from "./services/cart.service";
 import {AuthService} from "./services/auth.service";
 import {AdminGuard} from "./services/admin-gaurd";
+import {MessageService} from "./services/message.service";
 
 @NgModule({
 	imports: [
@@ -58,6 +59,6 @@ import {AdminGuard} from "./services/admin-gaurd";
 		CdkTreeModule,
 		DragDropModule, ScrollingModule
 	],
-	providers: [ProductService, OrderService, CartService, FormBuilder, AuthService, AdminGuard]
+	providers: [ProductService, OrderService, CartService, FormBuilder, AuthService, AdminGuard, MessageService]
 })
 export class SharedModule { }

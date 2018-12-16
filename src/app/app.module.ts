@@ -11,6 +11,9 @@ import { RouterModule } from '@angular/router';
 import {SharedModule} from "./shared/shared.module";
 import { AppRoutes } from './app.routing';
 import { HttpClientModule } from "@angular/common/http";
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +26,7 @@ import { HttpClientModule } from "@angular/common/http";
     RouterModule.forRoot(AppRoutes),
     MDBBootstrapModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
+    SocketIoModule.forRoot(config),
     HttpClientModule
   ],
   bootstrap: [AppComponent],

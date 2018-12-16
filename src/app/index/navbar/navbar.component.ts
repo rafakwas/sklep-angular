@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("navbar component init");
   }
 
   logout() {
