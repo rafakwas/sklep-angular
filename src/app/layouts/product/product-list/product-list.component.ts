@@ -13,6 +13,8 @@ export class ProductListComponent implements OnInit {
 
   productList: Observable<Product[]>;
 
+  pages = [5,10,20,50];
+  perPage = 10;
   categories = ['All', 'INNE'];
   filterByCategory: 'All';
   filterByName: '';

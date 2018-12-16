@@ -33,12 +33,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="row">
           <div class="form-group">
             <label for="upperPriceBound">Do ceny</label>
             <input type="number" class="form-control" id="upperPriceBound" name="upperPriceBound"
                    [(ngModel)]="upperPriceBound"/>
           </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="perPage">Liczba ofert na stronę</label>
+          <select class="form-control" name="" id="perPage" [(ngModel)]="perPage">
+            <option *ngFor="let page of pages" [ngValue]="page">{{page}}</option>
+          </select>
         </div>
       </div>
     </div>
@@ -46,7 +52,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4 mb-2"
-               *ngFor="let product of productList | async | filterByCategory: selectedItems | filterByName: filterByName | lowerPriceBound: lowerPriceBound | upperPriceBound: upperPriceBound | paginate: { itemsPerPage: 10, currentPage: page }"
+               *ngFor="let product of productList | async | filterByCategory: selectedItems | filterByName: filterByName | lowerPriceBound: lowerPriceBound | upperPriceBound: upperPriceBound | paginate: { itemsPerPage: perPage, currentPage: page }"
           >
             <app-product [product]="product"></app-product>
           </div>
