@@ -14,7 +14,7 @@
       <div class="card-body card-body-cascade text-center">
         <!--Category & Title-->
         <h5>{{ product.category }}</h5>
-        <h4 class="card-title"><strong><a href=""> {{product.name }} </a></strong></h4>
+        <h4 class="card-title"><strong><a (click)="openDetailsModal()"> {{product.name }} </a></strong></h4>
 
         <!--Description-->
         <p class="card-text">{{ product.description }}</p>

@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl, NgForm} from "@angular/forms";
-import { ProductService } from 'src/app/shared/services/product.service';
-import { Product } from 'src/app/shared/models/product';
-import {Order, OrderStatus} from "src/app/shared/models/order";
+import {Component, OnInit} from "@angular/core";
+import {FormGroup, Validators, FormControl} from "@angular/forms";
+import {ProductService} from "src/app/shared/services/product.service";
 import {OrderService} from "../../../shared/services/order.service";
 import {Router} from "@angular/router";
-import {OrderProduct} from "../../../shared/models/orderProduct";
 import {CartService} from "../../../shared/services/cart.service";
 import {AuthService} from "../../../shared/services/auth.service";
 

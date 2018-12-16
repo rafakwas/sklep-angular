@@ -72,6 +72,7 @@ export class OrderService {
       // this.productService.decrementProductAmount(orderProduct.product.id,orderProduct.product.quantity);
     });
     order.status = OrderStatus.COMPLETED;
+    order.sendDate = new Date();
     this.updateOrder(order);
   }
 

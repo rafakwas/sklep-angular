@@ -3,6 +3,7 @@ import {NgForm, FormGroup, Validators, FormControl} from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product';
 import {ToastrService} from "../../../shared/services/toastr.service";
+import {Router} from "@angular/router";
 
 declare var $: any;
 declare var require: any;
@@ -19,7 +20,13 @@ const moment = require('moment');
 export class AddProductComponent implements OnInit {
 
   productForm : FormGroup;
-  constructor(private productService: ProductService, private toastrService: ToastrService) {}
+
+  categories = ['samochody','żywność','narzędzia','rtv','inne'];
+  selectedCategory = 'inne';
+
+  constructor(private productService: ProductService,
+              private toastrService: ToastrService,
+              private router: Router) {}
 
   ngOnInit() {
     this.productForm = this.createFormGroup();
@@ -28,7 +35,7 @@ export class AddProductComponent implements OnInit {
   createFormGroup() {
     return new FormGroup({
       name: new FormControl('',[Validators.required,Validators.minLength(2)]),
-      category: new FormControl('',[Validators.required,Validators.minLength(2)]),
+      category: new FormControl('',[Validators.required]),
       price: new FormControl('',Validators.required),
       description: new FormControl('',Validators.required),
       imageUrl: new FormControl('',[Validators.required]),
@@ -39,7 +46,7 @@ export class AddProductComponent implements OnInit {
   createProduct() {
     var product = new Product();
     product.name = this.productForm.value['name'];
-    product.category = this.productForm.value['category'];
+    product.category = this.selectedCategory;
     product.price = this.productForm.value['price'];
     product.description = this.productForm.value['description'];
     product.imageUrl =this.productForm.value['imageUrl'];
@@ -48,7 +55,7 @@ export class AddProductComponent implements OnInit {
     product.bargain = 0;
     product.till = 0;
     this.productService.createProduct(product);
-    toastr.success('product ' + product + 'is added successfully', 'Product Creation');
+    this.router.navigateByUrl('/products/all-products');
   }
 
 }

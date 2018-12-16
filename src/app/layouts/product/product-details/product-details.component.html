@@ -1,0 +1,45 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="product-image">
+        <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+          <img [src]="product.imageUrl" [alt]="product.name" width="100%" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="product-detail">
+        <h5 class="product-head">Detale produktu</h5>
+        <table class="table" cellspacing="0" style="max-height: 28px">
+          <tbody>
+          <tr>
+            <th scope="row">Nazwa</th>
+            <td>{{product.name}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Cena jednostkowa</th>
+            <td>{{product.price}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Opis</th>
+            <td>{{product.description}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Kategoria</th>
+            <td>{{product.category}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Dostępnych</th>
+            <td>{{product.quantity}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Produkt dodany</th>
+            <td>{{product.productAdded * 1000 | date}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

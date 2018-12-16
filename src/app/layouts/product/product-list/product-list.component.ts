@@ -15,7 +15,6 @@ export class ProductListComponent implements OnInit {
 
   pages = [5,10,20,50];
   perPage = 10;
-  categories = ['All', 'INNE'];
   filterByCategory: 'All';
   filterByName: '';
   lowerPriceBound: number;
@@ -37,11 +36,14 @@ export class ProductListComponent implements OnInit {
       { item_id: 2, item_text: 'żywność' },
       { item_id: 3, item_text: 'narzędzia' },
       { item_id: 4, item_text: 'rtv' },
-      { item_id: 5, item_text: 'agh' }
+      { item_id: 5, item_text: 'inne' }
     ];
     this.selectedItems = [
+      { item_id: 1, item_text: 'samochody' },
+      { item_id: 2, item_text: 'żywność' },
       { item_id: 3, item_text: 'narzędzia' },
-      { item_id: 4, item_text: 'rtv' }
+      { item_id: 4, item_text: 'rtv' },
+      { item_id: 5, item_text: 'inne' }
     ];
     this.dropdownSettings = {
       singleSelection: false,

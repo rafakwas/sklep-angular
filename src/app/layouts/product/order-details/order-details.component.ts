@@ -43,6 +43,7 @@ export class OrderDetailsComponent implements OnInit {
     if (unchecked == 0) {
       this.toastrService.success("Zamówienie skompletowane w całości!","");
       this.order.status = OrderStatus.COMPLETED;
+      this.order.sendDate = new Date();
     } else {
       this.toastrService.success("Zamówienie skompletowane po części!","");
       this.order.status = OrderStatus.IN_PROGRESS;

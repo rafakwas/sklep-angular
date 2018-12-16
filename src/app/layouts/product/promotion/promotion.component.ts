@@ -43,6 +43,4 @@ export class PromotionComponent implements OnInit {
     this.productService.updateProduct(this.product);
     this.activeModal.close();
   }
-
-
 }

@@ -5,6 +5,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {CartService} from "../../../shared/services/cart.service";
 import {PromotionComponent} from "../promotion/promotion.component";
 import {EditComponent} from "../edit/edit.component";
+import {ProductDetailsComponent} from "../product-details/product-details.component";
 
 @Component({
   selector: 'app-product',
@@ -27,6 +28,11 @@ export class ProductComponent implements OnInit {
     modalRef.componentInstance.product = this.product;
     console.log(modalRef.componentInstance.product.id);
     console.log(modalRef.componentInstance.product.id);
+  }
+
+  openDetailsModal() {
+    const modalRef = this.modalService.open(ProductDetailsComponent);
+    modalRef.componentInstance.product = this.product;
   }
 
   openEditModal() {
