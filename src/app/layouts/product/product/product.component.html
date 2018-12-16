@@ -17,8 +17,7 @@
         <h4 class="card-title"><strong><a (click)="openDetailsModal()"> {{product.name }} </a></strong></h4>
 
         <!--Description-->
-        <p class="card-text">{{ product.description }}</p>
-
+        <p class="card-text" *ngIf="isPromotionAvailable()">-{{product.bargain}}%<i class="fa fa-tag"></i></p>
         <!--Card footer-->
         <div class="container">
           <div class="card-footer">
@@ -29,7 +28,7 @@
                     <a class="active" data-placement="top" title="Edytuj" (click)="openEditModal()"
                        *ngIf="getAuthService().isRole('ADMIN')"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka"
-                       *ngIf="isProductAvailable(product) && !(getAuthService().isRole('ADMIN') || getAuthService().isRole('MANAGER'))"
+                       *ngIf="isProductAvailable(product) && (!getAuthService().isLoggedIn || getAuthService().isRole('CUSTOMER'))"
                        (click)="addToCart(product)"><i class="fa fa-cart-plus"
                                                        aria-hidden="true"></i></a>
                   </span>

@@ -44,23 +44,16 @@ export class ProductComponent implements OnInit {
     this.cartService.addToCart(product);
   }
 
+  isPromotionAvailable() {
+    return this.product.bargain > 0 && this.product.till && ((new Date().getTime()) < this.product.till);
+  }
+
   isProductAvailable(product: Product) {
     let cartProducts = this.cartService.getLocalCartProducts();
-    if (cartProducts.length === 0 && product.quantity > 0) {
-      return true;
-    }
-    if (cartProducts.length === 0 && product.quantity <= 0) {
-      return false;
-    }
-    for (var i = 0; i < cartProducts.length; i++) {
-      if (cartProducts[i].id == product.id) {
-        if (product.quantity <= cartProducts[i].quantity) {
-          console.log("database product " + product.quantity + ". cart product " + cartProducts[i].quantity);
-          return false;
-        }
-      }
-    }
-    return true;
+    var cartProductQuantity = 0;
+    cartProducts.filter(cp => cp.id === product.id).forEach(cp => cartProductQuantity = cp.quantity);
+    let leftQuantity = product.quantity-cartProductQuantity;
+    return leftQuantity > 0;
   }
 
   getAuthService() {
