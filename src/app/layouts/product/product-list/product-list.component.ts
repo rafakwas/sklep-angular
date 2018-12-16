@@ -30,7 +30,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productList = this.productService.getProducts();
-
     this.dropdownList = [
       { item_id: 1, item_text: 'samochody' },
       { item_id: 2, item_text: 'żywność' },

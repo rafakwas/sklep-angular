@@ -25,11 +25,11 @@
             <span class="float-left">{{ product.price }} PLN</span>
             <span class="float-right">
                     <a class="active" data-placement="top" title="Promocje" (click)="openPromotionModal()"
-                       *ngIf="getAuthService().hasAdminPermissions()"><i class="fa fa-gift" aria-hidden="true"></i></a>
+                       *ngIf="getAuthService().isRole('ADMIN')"><i class="fa fa-gift" aria-hidden="true"></i></a>
                     <a class="active" data-placement="top" title="Edytuj" (click)="openEditModal()"
-                       *ngIf="getAuthService().hasAdminPermissions()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                       *ngIf="getAuthService().isRole('ADMIN')"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a class="active" data-toggle="tooltip" data-placement="top" title="Dodaj do koszyka"
-                       *ngIf="isProductAvailable(product) && !(getAuthService().hasAdminPermissions() || getAuthService().hasManagerPermissions())"
+                       *ngIf="isProductAvailable(product) && !(getAuthService().isRole('ADMIN') || getAuthService().isRole('MANAGER'))"
                        (click)="addToCart(product)"><i class="fa fa-cart-plus"
                                                        aria-hidden="true"></i></a>
                   </span>

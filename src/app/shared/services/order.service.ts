@@ -69,7 +69,7 @@ export class OrderService {
         this.toastrService.success("Mamy checked na false","");
       }
       orderProduct.isChecked = true;
-      // this.productService.decrementProductAmount(orderProduct.product.id,orderProduct.product.quantity);
+      this.productService.decrementProductAmount(orderProduct.product.id,orderProduct.product.quantity);
     });
     order.status = OrderStatus.COMPLETED;
     order.sendDate = new Date();

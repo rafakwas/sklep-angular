@@ -96,7 +96,7 @@ export class AuthService {
   }
 
   isRole(role: string) {
-    if (this.data.role) {
+    if (this.isLoggedIn && this.data.role) {
       return this.data.role === role;
     }
     return false;
@@ -106,11 +106,4 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
-  hasManagerPermissions() {
-    return this.isSignedIn && (this.isRole('MANAGER') || this.isRole('ADMIN'));
-  }
-
-  hasAdminPermissions() {
-    return this.isSignedIn && this.isRole('ADMIN');
-  }
 }
