@@ -10,7 +10,7 @@ export class CartService {
 
   getItemsCounter() {
     var counter = 0;
-    const products: Product[] = JSON.parse(localStorage.getItem('avct_item')) || [];
+    const products: Product[] = JSON.parse(localStorage.getItem('basket')) || [];
     products.forEach((product) => {
       counter += product.quantity;
     });
@@ -21,7 +21,7 @@ export class CartService {
     var copiedProduct = Object.assign({},data);
     copiedProduct.quantity = 1;
     let a: Product[];
-    a = JSON.parse(localStorage.getItem('avct_item')) || [];
+    a = JSON.parse(localStorage.getItem('basket')) || [];
     var found = false;
     for (let i = 0; i < a.length; i++) {
       if (a[i].id === data.id) {
@@ -33,11 +33,11 @@ export class CartService {
     if (!found) {
       a.push(copiedProduct);
     }
-    localStorage.setItem('avct_item', JSON.stringify(a));
+    localStorage.setItem('basket', JSON.stringify(a));
   }
 
   removeLocalCartProduct(product: Product) {
-    const products: Product[] = JSON.parse(localStorage.getItem('avct_item'));
+    const products: Product[] = JSON.parse(localStorage.getItem('basket'));
     for (let i = 0; i < products.length; i++) {
       if (products[i].id === product.id) {
         if (products[i].quantity === 1) {
@@ -48,17 +48,17 @@ export class CartService {
         break;
       }
     }
-    localStorage.setItem('avct_item', JSON.stringify(products));
+    localStorage.setItem('basket', JSON.stringify(products));
   }
 
   getLocalCartProducts(): Product[] {
-    return JSON.parse(localStorage.getItem('avct_item')) || [];
+    return JSON.parse(localStorage.getItem('basket')) || [];
   }
 
   freeLocalCart() {
     let a: Product[];
     a = [];
-    localStorage.setItem('avct_item', JSON.stringify(a));
+    localStorage.setItem('basket', JSON.stringify(a));
   }
 
   calculateCartProductsPrice() {
